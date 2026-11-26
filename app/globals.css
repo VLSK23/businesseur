@@ -1,0 +1,2299 @@
+@import "tailwindcss";
+
+/* =========================================================
+   BUSINESSEUR · Landing page
+   HTML + CSS uniquement (aucun JavaScript)
+
+   Sommaire
+   1.  Variables (couleurs, polices, espacements)
+   2.  Base et utilitaires
+   3.  Boutons et liens
+   4.  En-tête et menu (avec menu mobile sans JS)
+   5.  Hero : ciel, soleil, étoiles, fée, dunes
+   6.  Bandeau défilant
+   7.  Sections communes
+   8.  Profils
+   9.  Étapes
+   10. Fairy (fée IA) et chat
+   11. Témoignages
+   12. Appel à l'inscription
+   13. Newsletter et contact
+   14. Pied de page
+   15. Animations (@keyframes)
+   16. Apparition au défilement
+   17. Responsive (tablette, mobile)
+   18. Accessibilité : réduire les animations
+   ========================================================= */
+
+
+/* ---------- 1. VARIABLES ---------- */
+:root {
+    /* Palette "désert & oasis" */
+    --nuit: #231D4F;          /* ciel de nuit */
+    --nuit-2: #352C68;
+    --crepuscule: #6F5A8E;    /* violet du soir */
+    --terracotta: #B3627F;
+    --or: #D38A45;            /* or du soleil, couleur d'action */
+    --or-clair: #DDB463;
+    --sable: #F8EEDF;         /* fond clair */
+    --sable-fonce: #EAD7B8;
+    --oasis: #4F7DB5;         /* eau de l'oasis */
+    --oasis-clair: #8BAACF;
+    --texte: #2B2236;
+    --texte-doux: #6A5F70;
+    --blanc: #FFFFFF;
+
+    /* Polices */
+    --police-titre: var(--font-fraunces), "Fraunces", Georgia, serif;
+    --police-texte: var(--font-inter), "Inter", Arial, sans-serif;
+
+    /* Formes et ombres */
+    --rayon: 20px;
+    --ombre: 0 20px 50px -20px rgba(43, 34, 54, .25);
+    --ombre-forte: 0 30px 70px -25px rgba(43, 34, 54, .45);
+    --transition: .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+
+/* ---------- 2. BASE ET UTILITAIRES ---------- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px; /* les ancres ne passent pas sous le menu fixe */
+}
+
+body {
+    font-family: var(--police-texte);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--texte);
+    background-color: var(--sable);
+    overflow-x: hidden;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--police-titre);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -.01em;
+}
+
+.conteneur {
+    width: min(1160px, 100% - 64px); /* 20px de marge de chaque côté minimum */
+    margin-inline: auto;
+}
+
+.centre {
+    text-align: center;
+    justify-content: center;
+}
+
+/* Cache un texte à l'écran mais le garde pour les lecteurs d'écran */
+.visuellement-cache {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+/* Petit texte au-dessus des titres */
+.surtitre {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--or-clair);
+    margin-bottom: 18px;
+}
+
+.surtitre--sombre {
+    color: var(--terracotta);
+}
+
+/* Point lumineux qui pulse */
+.pastille {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--oasis-clair);
+    box-shadow: 0 0 0 0 rgba(139, 170, 207, .7);
+    animation: pulsation 2s infinite;
+}
+
+/* Texte en dégradé doré */
+.degrade {
+    background: linear-gradient(90deg, #DDB463, #D38A45, #B3627F, #6F5A8E, #4F7DB5, #DDB463);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: reflet 6s linear infinite;
+}
+
+
+/* ---------- 3. BOUTONS ET LIENS ---------- */
+.bouton {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-family: var(--police-texte);
+    font-size: .95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.bouton:hover {
+    transform: translateY(-3px);
+}
+
+.bouton svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform var(--transition);
+}
+
+.bouton:hover svg {
+    transform: translateX(4px);
+}
+
+.bouton--grand {
+    padding: 16px 30px;
+    font-size: 1rem;
+}
+
+/* Bouton principal doré, avec un reflet qui passe au survol */
+.bouton--or {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #D9A24F, var(--or) 45%, var(--terracotta));
+    color: var(--blanc);
+    box-shadow: 0 10px 30px -10px rgba(211, 138, 69, .8);
+}
+
+.bouton--or::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, .6) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform .7s;
+}
+
+.bouton--or:hover::after {
+    transform: translateX(120%);
+}
+
+/* Bouton "verre dépoli" pour les fonds sombres */
+.bouton--verre {
+    background: rgba(255, 255, 255, .08);
+    border-color: rgba(255, 255, 255, .3);
+    color: var(--blanc);
+    backdrop-filter: blur(8px);
+}
+
+.bouton--verre:hover {
+    background: rgba(255, 255, 255, .18);
+}
+
+.bouton--nuit {
+    background: var(--nuit);
+    color: var(--blanc);
+    box-shadow: 0 10px 30px -12px rgba(35, 29, 79, .7);
+}
+
+.bouton--nuit:hover {
+    background: var(--nuit-2);
+}
+
+/* Lien avec flèche animée */
+.lien-fleche {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--terracotta);
+}
+
+.lien-fleche::after {
+    content: "→";
+    transition: transform var(--transition);
+}
+
+.lien-fleche:hover::after {
+    transform: translateX(6px);
+}
+
+.lien-discret {
+    font-size: .95rem;
+    font-weight: 500;
+    opacity: .85;
+}
+
+.lien-discret:hover {
+    opacity: 1;
+}
+
+
+/* ---------- 4. EN-TÊTE ET MENU ---------- */
+.entete {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    color: var(--blanc);
+    background: rgba(35, 29, 79, .88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.entete__contenu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--police-titre);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.logo em {
+    font-style: normal;
+    color: inherit; /* "Businesseur" d'une seule couleur (blanc dans l'en-tête) */
+}
+
+.logo__icone {
+    width: 46px;
+    height: auto;
+    transition: transform .6s;
+}
+
+.logo:hover .logo__icone {
+    transform: rotate(-12deg) scale(1.08);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav__liens {
+    display: flex;
+    gap: 22px;
+    white-space: nowrap;
+    list-style: none;
+}
+
+.nav__liens a {
+    position: relative;
+    font-size: .95rem;
+    font-weight: 500;
+    opacity: .85;
+}
+
+/* Soulignement doré qui s'étire au survol */
+.nav__liens a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: var(--or);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--transition);
+}
+
+.nav__liens a:hover {
+    opacity: 1;
+}
+
+.nav__liens a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.nav__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    white-space: nowrap;
+}
+
+/* Case à cocher cachée qui pilote le menu mobile */
+.menu-toggle {
+    display: none;
+}
+
+/* Icône "burger" (3 traits), visible seulement sur mobile */
+.burger {
+    display: none;
+    width: 44px;
+    height: 44px;
+    position: relative;
+    cursor: pointer;
+}
+
+.burger span,
+.burger span::before,
+.burger span::after {
+    position: absolute;
+    left: 10px;
+    width: 24px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--blanc);
+    transition: transform var(--transition), top var(--transition), opacity var(--transition);
+}
+
+.burger span { top: 21px; }
+.burger span::before { content: ""; left: 0; top: -8px; }
+.burger span::after  { content: ""; left: 0; top: 8px; }
+
+/* Quand la case est cochée : le burger devient une croix */
+.menu-toggle:checked + .burger span { background: transparent; }
+.menu-toggle:checked + .burger span::before { top: 0; transform: rotate(45deg); }
+.menu-toggle:checked + .burger span::after  { top: 0; transform: rotate(-45deg); }
+
+
+/* ---------- 5. HERO ---------- */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: 130px 0 clamp(200px, 24vw, 360px);
+    overflow: hidden;
+    color: var(--blanc);
+    /* Le ciel : de la nuit en haut au sable doré à l'horizon */
+    background: linear-gradient(180deg,
+        var(--nuit) 0%,
+        var(--nuit-2) 25%,
+        var(--crepuscule) 50%,
+        #B3627F 72%,
+        #D9A06A 100%);
+}
+
+/* Étoiles */
+.etoiles i {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--blanc);
+    box-shadow: 0 0 8px 2px rgba(255, 255, 255, .6);
+    animation: scintille 3.5s ease-in-out infinite;
+    animation-delay: var(--d);
+}
+
+/* Soleil couchant */
+.soleil {
+    position: absolute;
+    right: 18%;
+    bottom: 14%;
+    width: clamp(140px, 15vw, 230px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 40%, #F0D9AA, #D9A06E 60%, #C27650);
+    box-shadow: 0 0 120px 40px rgba(217, 160, 110, .45);
+    animation: respire 8s ease-in-out infinite;
+}
+
+.hero__contenu {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero h1 {
+    font-size: clamp(2.3rem, 5vw, 4.2rem);
+    font-weight: 400;
+    letter-spacing: -.02em;
+    margin-bottom: 24px;
+    animation: monte 1s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.hero__intro {
+    max-width: 540px;
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, .85);
+    margin-bottom: 36px;
+    animation: monte 1s .15s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.hero__intro strong {
+    color: var(--blanc);
+}
+
+.hero__boutons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    animation: monte 1s .3s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.chiffres {
+    display: flex;
+    gap: 40px;
+    margin-top: 48px;
+    list-style: none;
+    animation: monte 1s .45s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.chiffres strong {
+    display: block;
+    font-family: var(--police-titre);
+    font-size: 1.9rem;
+    color: var(--or-clair);
+}
+
+.chiffres span {
+    font-size: .85rem;
+    color: rgba(255, 255, 255, .7);
+}
+
+/* La fée */
+.hero__fee {
+    position: relative;
+    justify-self: center;
+    width: min(380px, 100%);
+    animation: flotte 6s ease-in-out infinite;
+}
+
+.fee {
+    position: relative;
+    width: 100%;
+    filter: drop-shadow(0 0 30px rgba(221, 180, 99, .55));
+}
+
+.fee-halo {
+    position: absolute;
+    inset: 10%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139, 170, 207, .35), transparent 70%);
+    animation: respire 4s ease-in-out infinite;
+}
+
+/* Ailes qui battent : on les écrase horizontalement en rythme */
+.aile {
+    transform-box: fill-box;
+    animation: battement 2.4s ease-in-out infinite alternate;
+}
+
+.aile--gauche { transform-origin: right center; }
+.aile--droite { transform-origin: left center; }
+
+.etoile-fairy {
+    transform-box: view-box;
+    transform-origin: center;
+    animation: tourne 60s linear infinite;
+}
+
+/* Sélecteur de langue FR / EN */
+.langue {
+    display: flex;
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 999px;
+    overflow: hidden;
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.langue a {
+    padding: 6px 10px;
+    opacity: .7;
+}
+
+.langue a:hover {
+    opacity: 1;
+}
+
+.langue .langue--active {
+    background: rgba(255, 255, 255, .15);
+    opacity: 1;
+}
+
+/* Section Notre histoire : collée à la pluie de sable */
+.section.histoire {
+    padding-top: 60px;
+    padding-bottom: 30px;
+}
+
+.histoire__grille {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.histoire__grille p:not(.surtitre) {
+    color: var(--texte-doux);
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+}
+
+.orbite {
+    transform-box: view-box;
+    transform-origin: center;
+    animation: tourne 30s linear infinite;
+}
+
+.orbite--inverse {
+    animation-direction: reverse;
+    animation-duration: 20s;
+}
+
+.baguette-etoile {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: tourne 4s linear infinite;
+}
+
+/* Paillettes qui partent de la baguette */
+.paillettes i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--or-clair);
+    box-shadow: 0 0 10px 3px rgba(221, 180, 99, .8);
+    opacity: 0;
+    animation: paillette 3s ease-out infinite;
+    animation-delay: var(--d);
+}
+
+/* Paysage de dunes */
+.paysage {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: clamp(220px, 26vw, 420px);
+    z-index: 1;
+}
+
+/* Les dunes restent fixes : les voyageurs marchent sur leur crête */
+
+.eau {
+    animation: miroite 4s ease-in-out infinite;
+}
+
+
+/* ---------- 6. BANDEAU DÉFILANT ---------- */
+.bandeau {
+    overflow: hidden;
+    padding: 18px 0;
+    background: var(--nuit);
+    color: var(--sable-fonce);
+}
+
+.bandeau__piste {
+    display: flex;
+    gap: 40px;
+    width: max-content;
+    font-family: var(--police-titre);
+    font-size: 1.3rem;
+    font-style: italic;
+    white-space: nowrap;
+    /* Le contenu est écrit deux fois : on le décale de 50% puis on recommence */
+    animation: defile 35s linear infinite;
+}
+
+.bandeau__piste span:nth-child(even) {
+    color: var(--or);
+    font-style: normal;
+}
+
+
+/* ---------- 7. SECTIONS COMMUNES ---------- */
+.section {
+    position: relative;
+    padding: clamp(64px, 8vw, 104px) 0;
+}
+
+.section--sable {
+    background: var(--sable-fonce);
+    /* Motif de petites dunes très discret en fond */
+    background-image: radial-gradient(rgba(179, 98, 127, .08) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+
+.section--nuit {
+    color: var(--blanc);
+    background:
+        radial-gradient(circle at 15% 20%, rgba(79, 125, 181, .25), transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(211, 138, 69, .18), transparent 45%),
+        var(--nuit);
+}
+
+.section__tete {
+    max-width: 680px;
+    margin: 0 auto 52px;
+    text-align: center;
+}
+
+.section__tete h2,
+.section h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 18px;
+}
+
+.section__tete p {
+    color: var(--texte-doux);
+    font-size: 1.1rem;
+}
+
+
+/* ---------- 8. PROFILS ---------- */
+.profils {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    align-items: stretch;
+}
+
+.profil {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 34px;
+    border-radius: var(--rayon);
+    background: var(--blanc);
+    box-shadow: var(--ombre);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.profil:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--ombre-forte);
+}
+
+.profil h3 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+}
+
+.profil > p {
+    color: var(--texte-doux);
+    margin-bottom: 22px;
+}
+
+.profil__liste {
+    list-style: none;
+    margin-bottom: 28px;
+    flex: 1; /* pousse le lien en bas de la carte */
+}
+
+.profil__liste li {
+    position: relative;
+    padding: 8px 0 8px 28px;
+    border-top: 1px solid rgba(43, 34, 54, .08);
+    font-size: .95rem;
+}
+
+.profil__liste li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--or);
+}
+
+.profil__icone {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 24px;
+    border-radius: 18px;
+    transition: transform var(--transition);
+}
+
+.profil:hover .profil__icone {
+    transform: translateY(-3px);
+}
+
+.profil__icone svg {
+    width: 34px;
+    height: 34px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.profil__icone--sable { background: #FBE6CF; color: var(--terracotta); }
+.profil__icone--oasis { background: rgba(139, 170, 207, .2); color: var(--oasis-clair); }
+.profil__icone--nuit  { background: #E6E3F3; color: var(--nuit-2); }
+
+/* Carte du milieu mise en avant, sur fond nuit */
+.profil--vedette {
+    background: linear-gradient(160deg, var(--nuit-2), var(--nuit));
+    color: var(--blanc);
+    transform: translateY(-16px);
+}
+
+.profil--vedette:hover {
+    transform: translateY(-26px);
+}
+
+.profil--vedette > p { color: rgba(255, 255, 255, .75); }
+.profil--vedette .profil__liste li { border-color: rgba(255, 255, 255, .1); }
+.profil--vedette .lien-fleche { color: var(--or); }
+
+.etiquette {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--or);
+    color: var(--nuit);
+    font-size: .75rem;
+    font-weight: 600;
+}
+
+
+/* ---------- 9. ÉTAPES ---------- */
+.etapes {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    list-style: none;
+    margin-bottom: 60px;
+}
+
+/* Ligne pointillée qui relie les étapes, comme un chemin de caravane */
+.etapes::before {
+    content: "";
+    position: absolute;
+    top: 38px;
+    left: 12%;
+    right: 12%;
+    border-top: 2px dashed rgba(179, 98, 127, .4);
+}
+
+.etape {
+    position: relative;
+    text-align: center;
+}
+
+.etape__numero {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: var(--sable);
+    border: 2px solid var(--or);
+    font-family: var(--police-titre);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--terracotta);
+    box-shadow: 0 0 0 8px var(--sable-fonce);
+    transition: background var(--transition), color var(--transition);
+}
+
+.etape:hover .etape__numero {
+    background: var(--or);
+    color: var(--nuit);
+}
+
+.etape h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.etape p {
+    max-width: 320px;
+    margin: 0 auto;
+    color: var(--texte-doux);
+}
+
+
+/* ---------- 10. LUMIA ET CHAT ---------- */
+.lumia {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 70px;
+}
+
+.lumia__texte > p {
+    color: rgba(255, 255, 255, .78);
+    font-size: 1.1rem;
+    margin-bottom: 26px;
+}
+
+.atouts {
+    list-style: none;
+    margin-bottom: 36px;
+}
+
+.atouts li {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+}
+
+.atouts span {
+    color: var(--or);
+}
+
+/* Fenêtre de chat en verre dépoli */
+.chat {
+    position: relative;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .14);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .6);
+    overflow: hidden;
+}
+
+/* Lueur dorée qui tourne derrière la fenêtre */
+.chat::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: conic-gradient(from 0deg, transparent, rgba(211, 138, 69, .25), transparent 30%);
+    animation: tourne 10s linear infinite;
+    z-index: -1;
+}
+
+.chat__entete {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+.chat__entete small {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: .8rem;
+    color: var(--oasis-clair);
+}
+
+.chat__avatar {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--oasis-clair), var(--or-clair));
+    color: var(--nuit);
+    font-size: 1.2rem;
+    box-shadow: 0 0 20px rgba(221, 180, 99, .6);
+}
+
+.chat__corps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 360px;
+    padding: 24px 22px;
+}
+
+/* Bulles : elles apparaissent une à une, en boucle */
+.bulle {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: .95rem;
+    opacity: 0;
+    animation: bulle 12s ease-out infinite;
+    animation-delay: calc(var(--ordre) * .9s);
+}
+
+.bulle--fee {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, .1);
+    border-bottom-left-radius: 4px;
+}
+
+.bulle--moi {
+    align-self: flex-end;
+    background: var(--oasis);
+    border-bottom-right-radius: 4px;
+}
+
+.bulle--carte {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 85%;
+    background: var(--sable);
+    color: var(--texte);
+}
+
+.bulle--carte div {
+    flex: 1;
+}
+
+.bulle--carte small {
+    display: block;
+    color: var(--texte-doux);
+    font-size: .8rem;
+}
+
+.score {
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(79, 125, 181, .15);
+    color: var(--oasis);
+    font-weight: 600;
+    font-size: .85rem;
+}
+
+/* Les trois points "Fairy est en train d'écrire" */
+.bulle--ecrit {
+    display: flex;
+    gap: 5px;
+}
+
+.bulle--ecrit i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--blanc);
+    animation: rebond 1.2s infinite;
+}
+
+.bulle--ecrit i:nth-child(2) { animation-delay: .15s; }
+.bulle--ecrit i:nth-child(3) { animation-delay: .3s; }
+
+.mini-avatar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--terracotta), var(--or));
+    color: var(--blanc);
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+
+/* ---------- 11. TÉMOIGNAGES ---------- */
+.temoignages {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.temoignage {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 28px;
+    padding: 36px;
+    border-radius: var(--rayon);
+    background: var(--blanc);
+    box-shadow: var(--ombre);
+    transition: transform var(--transition);
+}
+
+.temoignage:hover {
+    transform: translateY(-4px);
+}
+
+.temoignage blockquote {
+    font-family: var(--police-titre);
+    font-size: 1.25rem;
+    line-height: 1.45;
+}
+
+.temoignage figcaption {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.temoignage small {
+    display: block;
+    color: var(--texte-doux);
+}
+
+
+/* ---------- 12. APPEL À L'INSCRIPTION ---------- */
+.appel {
+    padding: 0 0 clamp(64px, 8vw, 104px);
+}
+
+.appel__boite {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(60px, 8vw, 100px) 30px;
+    border-radius: 28px;
+    text-align: center;
+    color: var(--blanc);
+    background: linear-gradient(135deg, var(--nuit) 0%, var(--crepuscule) 60%, var(--terracotta) 100%);
+}
+
+.appel__boite h2 {
+    position: relative;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    margin-bottom: 16px;
+}
+
+.appel__boite p {
+    position: relative;
+    max-width: 520px;
+    margin: 0 auto 36px;
+    color: rgba(255, 255, 255, .82);
+    font-size: 1.1rem;
+}
+
+.appel__boite .hero__boutons {
+    position: relative;
+    animation: none;
+}
+
+/* Grande lune lumineuse en arrière-plan */
+.appel__lune {
+    position: absolute;
+    top: -120px;
+    right: -80px;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(221, 180, 99, .45), transparent 65%);
+    animation: respire 7s ease-in-out infinite;
+}
+
+
+/* ---------- 13. NEWSLETTER ET CONTACT ---------- */
+.contact {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.newsletter > p {
+    color: var(--texte-doux);
+    font-size: 1.1rem;
+    margin-bottom: 28px;
+}
+
+.newsletter__form {
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    margin-bottom: 12px;
+    border-radius: 999px;
+    background: var(--blanc);
+    box-shadow: var(--ombre);
+}
+
+.newsletter__form input {
+    flex: 1;
+    min-width: 0;
+    padding: 0 18px;
+    border: none;
+    background: transparent;
+    font: inherit;
+    outline: none;
+}
+
+.newsletter small {
+    color: var(--texte-doux);
+}
+
+.formulaire {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: clamp(28px, 4vw, 44px);
+    border-radius: 28px;
+    background: var(--blanc);
+    box-shadow: var(--ombre-forte);
+}
+
+.formulaire h2 {
+    font-size: 2rem;
+    margin-bottom: 4px;
+}
+
+.formulaire__ligne {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.champ {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.champ label {
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.champ input,
+.champ select,
+.champ textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--sable-fonce);
+    border-radius: 16px;
+    background: var(--sable);
+    font: inherit;
+    color: var(--texte);
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+/* Champ actif : bordure et halo couleur oasis */
+.champ input:focus,
+.champ select:focus,
+.champ textarea:focus {
+    outline: none;
+    border-color: var(--oasis);
+    background: var(--blanc);
+    box-shadow: 0 0 0 4px rgba(79, 125, 181, .15);
+}
+
+.champ textarea {
+    resize: vertical;
+}
+
+.formulaire .bouton {
+    align-self: flex-start;
+}
+
+
+/* ---------- 14. PIED DE PAGE ---------- */
+.pied {
+    padding: 80px 0 30px;
+    background: var(--nuit);
+    color: rgba(255, 255, 255, .75);
+}
+
+.pied__grille {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+.pied .logo {
+    color: var(--blanc);
+    margin-bottom: 14px;
+}
+
+.pied h4 {
+    margin-bottom: 16px;
+    font-size: 1.05rem;
+    color: var(--blanc);
+}
+
+.pied__grille > div > a:not(.logo):not(.bouton) {
+    display: block;
+    padding: 4px 0;
+    transition: color var(--transition);
+}
+
+.pied__grille a:not(.bouton):hover {
+    color: var(--or);
+}
+
+.pied__bas {
+    padding-top: 26px;
+    text-align: center;
+    font-size: .85rem;
+}
+
+
+/* ---------- 15. ANIMATIONS ---------- */
+@keyframes monte {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flotte {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-14px); }
+}
+
+@keyframes battement {
+    from { transform: scaleX(1); }
+    to   { transform: scaleX(.85); }
+}
+
+@keyframes tourne {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes paillette {
+    0%   { opacity: 0; transform: translate(0, 0) scale(.4); }
+    20%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.2); }
+}
+
+@keyframes scintille {
+    0%, 100% { opacity: .2; transform: scale(.7); }
+    50%      { opacity: 1;  transform: scale(1.2); }
+}
+
+@keyframes respire {
+    0%, 100% { transform: scale(1);    opacity: .9; }
+    50%      { transform: scale(1.06); opacity: 1; }
+}
+
+@keyframes glisse {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-40px); }
+}
+
+@keyframes miroite {
+    0%, 100% { opacity: .75; }
+    50%      { opacity: 1; }
+}
+
+@keyframes defile {
+    to { transform: translateX(-50%); }
+}
+
+@keyframes reflet {
+    to { background-position: 200% center; }
+}
+
+@keyframes pulsation {
+    70%  { box-shadow: 0 0 0 10px rgba(139, 170, 207, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(139, 170, 207, 0); }
+}
+
+@keyframes bulle {
+    0%       { opacity: 0; transform: translateY(14px) scale(.95); }
+    6%, 80%  { opacity: 1; transform: translateY(0) scale(1); }
+    88%, 100%{ opacity: 0; transform: translateY(-6px); }
+}
+
+@keyframes rebond {
+    0%, 60%, 100% { transform: translateY(0); opacity: .5; }
+    30%           { transform: translateY(-5px); opacity: 1; }
+}
+
+@keyframes apparaitre {
+    /* "translate" et "scale" (et non "transform") pour ne pas
+       bloquer les effets de survol qui utilisent transform */
+    from { opacity: 0; translate: 0 50px; scale: .97; }
+    to   { opacity: 1; translate: 0 0; scale: 1; }
+}
+
+
+/* ---------- 16. APPARITION AU DÉFILEMENT ----------
+   Les blocs ".apparition" glissent vers le haut quand ils entrent
+   à l'écran. C'est du CSS récent (animation-timeline) : les
+   navigateurs qui ne le connaissent pas affichent simplement
+   les blocs normalement. */
+@supports (animation-timeline: view()) {
+    .apparition {
+        animation: apparaitre linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 28%;
+    }
+}
+
+
+/* ---------- SABLE QUI TOMBE ----------
+   Bande de transition entre le désert et la suite de la page.
+   Chaque grain est un <i> positionné grâce aux variables
+   --x (position horizontale), --t (décalage), --taille, --duree. */
+.sable-chute {
+    position: relative;
+    height: 140px;
+    overflow: hidden;
+    /* Nomme la "timeline" de cette zone : elle avance quand on défile */
+    view-timeline-name: --zone-sable;
+    /* Le sable du désert se fond dans la couleur de la page */
+    /* Grain du sable (bruit SVG) par-dessus un dégradé dune -> crème */
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+        linear-gradient(180deg, #764C5B 0%, #B07F74 45%, var(--sable) 100%);
+    -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent);
+    mask-image: linear-gradient(180deg, #000 70%, transparent);
+    margin-top: -1px;
+}
+
+.sable-chute i {
+    position: absolute;
+    top: -20px;
+    left: var(--x);
+    /* Grain très fin étiré en traînée : effet de pluie de sable */
+    width: 1px;
+    height: var(--l);
+    background: linear-gradient(180deg, transparent, rgba(120, 72, 40, .75));
+    /* Par défaut : chute en boucle */
+    animation: chute var(--duree) linear infinite;
+    animation-delay: calc(var(--t) * -4s);
+}
+
+/* Une traînée sur trois est plus claire, couleur sable */
+.sable-chute i:nth-child(3n) {
+    background: linear-gradient(180deg, transparent, rgba(222, 190, 150, .9));
+}
+
+/* Une sur quatre est un peu plus épaisse */
+.sable-chute i:nth-child(4n) {
+    width: 1.5px;
+}
+
+@keyframes chute {
+    0%   { transform: translate(0, 0); opacity: 0; }
+    10%  { opacity: 1; }
+    85%  { opacity: 1; }
+    100% { transform: translate(calc(var(--t) * 6px - 3px), 160px); opacity: 0; }
+}
+
+/* Chute liée au défilement (Chrome, Edge) : les grains ne bougent
+   que lorsqu'on fait défiler la page, et s'arrêtent quand on s'arrête.
+   Chaque grain part d'une hauteur différente (--t) pour qu'il y en ait
+   toujours dans la zone visible. */
+@supports (view-timeline-name: --a) {
+    .sable-chute i {
+        opacity: 1;
+        animation: chute-defilement linear both;
+        animation-timeline: --zone-sable;
+        animation-range: cover 0% cover 100%;
+    }
+
+    @keyframes chute-defilement {
+        from { transform: translate(0, calc(var(--t) * -200px)); }
+        to   { transform: translate(calc(var(--t) * 6px - 3px), calc(var(--t) * -200px + 360px)); }
+    }
+}
+
+
+/* ---------- SABLE QUI SE DÉPOSE SUR LES TITRES ----------
+   Au-dessus de chaque titre ".titre-sable" :
+   - ::after  = un mince filet de sable qui tombe
+   - ::before = un petit tas de sable texturé qui grossit
+   Les deux sont pilotés par le défilement (Chrome, Edge). */
+.titre-sable {
+    position: relative;
+}
+
+.titre-sable::before,
+.titre-sable::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    pointer-events: none;
+}
+
+/* Le tas de sable */
+.titre-sable::before {
+    bottom: calc(100% + 2px);
+    width: 160px;
+    height: 18px;
+    margin-left: -80px;
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+        radial-gradient(ellipse 50% 100% at 50% 100%, #C98F67 0 55%, rgba(201, 143, 103, .5) 70%, transparent 72%);
+    background-size: 80px 80px, 100% 100%;
+    -webkit-mask-image: radial-gradient(ellipse 50% 100% at 50% 100%, #000 60%, transparent 72%);
+    mask-image: radial-gradient(ellipse 50% 100% at 50% 100%, #000 60%, transparent 72%);
+    transform-origin: 50% 100%;
+}
+
+/* Le filet qui coule */
+.titre-sable::after {
+    bottom: calc(100% + 14px);
+    width: 2px;
+    height: 120px;
+    margin-left: -1px;
+    background: repeating-linear-gradient(180deg, rgba(150, 95, 60, .85) 0 3px, transparent 3px 6px);
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 40%);
+    mask-image: linear-gradient(180deg, transparent, #000 40%);
+    opacity: 0;
+}
+
+@supports (animation-timeline: view()) {
+    .titre-sable::before {
+        animation: tas-grossit linear both;
+        animation-timeline: view();
+        animation-range: entry 20% cover 45%;
+    }
+
+    .titre-sable::after {
+        animation: filet-coule linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 50%;
+    }
+
+    @keyframes tas-grossit {
+        from { transform: scale(.05, 0); }
+        to   { transform: scale(1, 1); }
+    }
+
+    @keyframes filet-coule {
+        0%   { opacity: 0; background-position: 0 0; height: 20px; }
+        15%  { opacity: 1; }
+        80%  { opacity: 1; }
+        100% { opacity: 0; background-position: 0 90px; height: 120px; }
+    }
+}
+
+
+/* =========================================================
+   INTRO IMMERSIVE : LA PORTE DE L'OASIS
+   La section est haute (260vh) : on la fait défiler pendant que
+   la scène reste collée à l'écran (position: sticky).
+   L'avancement du défilement dans la section pilote toutes les
+   animations grâce à la timeline nommée --porte.
+   ========================================================= */
+.intro {
+    display: none; /* masquée si le navigateur ne gère pas l'effet */
+}
+
+@supports (view-timeline-name: --a) {
+    .intro {
+        display: block;
+        position: relative;
+        height: 210vh;
+        view-timeline-name: --porte;
+        /* ignore le scroll-padding (sinon l'animation démarre trop tôt) */
+        view-timeline-inset: 0px;
+        /* Couleur du ciel du désert : on y arrive à la fin du zoom */
+        background: var(--nuit);
+    }
+
+    .intro__scene {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        height: 100svh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* "safe center" : si l'écran est petit, le contenu part du haut
+           au lieu d'être coupé sous le menu */
+        justify-content: safe center;
+        gap: 3vh;
+        padding: 140px 20px 70px;
+        perspective: 1200px;
+        /* Ciel rose poudré, mat */
+        background:
+            radial-gradient(ellipse at 50% 110%, #C98A9B 0%, transparent 60%),
+            linear-gradient(180deg, #D7B3BD 0%, #E7C9C6 45%, #D9A9AE 100%);
+        animation: intro-scene linear both;
+        animation-timeline: --porte;
+        animation-range: contain 0% contain 100%;
+    }
+
+    /* ----- Nuages ----- */
+    .intro__nuages {
+        position: absolute;
+        inset: 0;
+    }
+
+    .nuage {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle at 40% 40%, #FBEFEF, #E9C6CC 60%, rgba(233, 198, 204, 0) 72%);
+        filter: blur(6px);
+        animation: nuage-gauche linear both;
+        animation-timeline: --porte;
+        animation-range: contain 0% contain 60%;
+    }
+
+    .nuage--1 { width: 46vw; height: 30vw; left: -14vw; top: 48%; }
+    .nuage--2 { width: 34vw; height: 22vw; left: 4vw;   top: 66%; }
+    .nuage--3 { width: 30vw; height: 20vw; left: -6vw;  top: 18%; opacity: .8; }
+    .nuage--4 { width: 22vw; height: 14vw; left: 18vw;  top: 40%; opacity: .7; }
+    .nuage--5 { width: 46vw; height: 30vw; right: -14vw; top: 50%; animation-name: nuage-droite; }
+    .nuage--6 { width: 34vw; height: 22vw; right: 4vw;   top: 68%; animation-name: nuage-droite; }
+    .nuage--7 { width: 30vw; height: 20vw; right: -6vw;  top: 14%; opacity: .8; animation-name: nuage-droite; }
+    .nuage--8 { width: 22vw; height: 14vw; right: 18vw;  top: 38%; opacity: .7; animation-name: nuage-droite; }
+
+    /* ----- Texte d'accueil ----- */
+    .intro__texte {
+        position: relative;
+        text-align: center;
+        color: #4A2E45;
+        z-index: 2;
+        animation: disparait linear both;
+        animation-timeline: --porte;
+        animation-range: contain 0% contain 18%;
+    }
+
+    .intro__texte .surtitre {
+        color: #8E4A63;
+        margin-bottom: 8px;
+    }
+
+    .intro__texte h2 {
+        font-size: clamp(1.8rem, 4vw, 3.2rem);
+    }
+
+    /* ----- La porte ----- */
+    .intro__porte {
+        --porte-h: min(320px, 40vh);
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Le zoom vise le haut de l'ouverture (ciel de nuit) :
+           hauteur de l'enseigne + 18 % de la porte */
+        transform-origin: 50% calc(44px + var(--porte-h) * .18);
+        animation: porte-zoom linear both;
+        animation-timeline: --porte;
+        animation-range: contain 0% contain 100%;
+    }
+
+    .intro__enseigne {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 44px;
+        padding: 0 18px;
+        font-family: var(--police-titre);
+        font-size: .95rem;
+        letter-spacing: .25em;
+        text-transform: uppercase;
+        color: #5A2E45;
+        font-weight: 600;
+    }
+
+    .intro__enseigne img {
+        width: 24px;
+    }
+
+    /* Encadrement en arche */
+    .intro__cadre {
+        position: relative;
+        height: var(--porte-h);
+        width: calc(var(--porte-h) * .625);
+        border-radius: 999px 999px 0 0;
+        overflow: hidden;
+        background: #231D4F;
+        box-shadow:
+            0 0 0 10px #9C5670,
+            0 0 0 12px #DDB463,
+            0 30px 60px -10px rgba(74, 46, 69, .55);
+        transform-style: preserve-3d;
+    }
+
+    .intro__vue {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 70% 50%;
+    }
+
+    /* Battants de la porte */
+    .battant {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 50%;
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(0, 0, 0, .15)),
+            #8E4A63;
+        backface-visibility: hidden;
+        animation-timeline: --porte;
+        animation-range: contain 8% contain 42%;
+        animation-fill-mode: both;
+        animation-timing-function: ease-in;
+    }
+
+    /* Moulures dorées sur chaque battant */
+    .battant i {
+        position: absolute;
+        inset: 40px 14px 24px;
+        border: 1.5px solid rgba(221, 180, 99, .7);
+        border-radius: 70px 70px 4px 4px;
+    }
+
+    .battant--gauche {
+        left: 0;
+        border-radius: 999px 0 0 0;
+        transform-origin: left center;
+        animation-name: battant-gauche;
+        border-right: 1px solid rgba(0, 0, 0, .25);
+    }
+
+    .battant--gauche i { border-radius: 70px 0 4px 4px; right: 8px; }
+
+    .battant--droite {
+        right: 0;
+        border-radius: 0 999px 0 0;
+        transform-origin: right center;
+        animation-name: battant-droite;
+    }
+
+    .battant--droite i { border-radius: 0 70px 4px 4px; left: 8px; }
+
+    /* Poignées */
+    .battant--gauche::after,
+    .battant--droite::after {
+        content: "";
+        position: absolute;
+        top: 55%;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #DDB463;
+    }
+
+    .battant--gauche::after { right: 10px; }
+    .battant--droite::after { left: 10px; }
+
+    /* Marches devant la porte */
+    .intro__marches {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .intro__marches i {
+        display: block;
+        height: 18px;
+        background: linear-gradient(180deg, #C98A9B, #A96A7E);
+        border-top: 1px solid rgba(255, 255, 255, .35);
+    }
+
+    .intro__marches i:nth-child(1) { width: 250px; }
+    .intro__marches i:nth-child(2) { width: 300px; }
+    .intro__marches i:nth-child(3) { width: 360px; }
+
+    /* Indication "faites défiler" */
+    /* Placée sous les marches (dans le flux), donc jamais cachée par la porte */
+    .intro__defiler {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        font-size: .8rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: #5A2E45;
+        font-weight: 600;
+        animation: disparait linear both;
+        animation-timeline: --porte;
+        animation-range: contain 0% contain 10%;
+    }
+
+    .intro__defiler i {
+        width: 1px;
+        height: 36px;
+        background: linear-gradient(180deg, #6B3F55, transparent);
+        animation: indice 1.6s ease-in-out infinite;
+    }
+
+    /* ----- Keyframes de l'intro ----- */
+    @keyframes porte-zoom {
+        0%, 38% { transform: scale(1); }
+        100%    { transform: scale(14); }
+    }
+
+    @keyframes battant-gauche {
+        from { transform: rotateY(0); }
+        to   { transform: rotateY(-108deg); }
+    }
+
+    @keyframes battant-droite {
+        from { transform: rotateY(0); }
+        to   { transform: rotateY(108deg); }
+    }
+
+    @keyframes nuage-gauche {
+        to { transform: translateX(-40vw) scale(1.2); opacity: 0; }
+    }
+
+    @keyframes nuage-droite {
+        to { transform: translateX(40vw) scale(1.2); opacity: 0; }
+    }
+
+    @keyframes disparait {
+        to { opacity: 0; transform: translateY(-20px); }
+    }
+
+    @keyframes intro-scene {
+        0%, 86% { opacity: 1; }
+        100%    { opacity: 0; }
+    }
+
+    @keyframes indice {
+        0%, 100% { transform: scaleY(.4); transform-origin: top; }
+        50%      { transform: scaleY(1);  transform-origin: top; }
+    }
+}
+
+
+/* =========================================================
+   PAYSAGE RÉALISTE (hero)
+   ========================================================= */
+.hero {
+    padding-bottom: 38vh;
+    view-timeline-name: --hero;
+}
+
+.paysage-reel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Le texte reste lisible au-dessus du ciel */
+.hero__texte {
+    text-shadow: 0 2px 24px rgba(35, 29, 79, .45);
+}
+
+.plan {
+    transform-box: view-box;
+    transform-origin: 50% 100%;
+}
+
+/* Voile sombre à gauche pour que le texte reste lisible sur les dunes */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg, rgba(35, 29, 79, .62) 0%, rgba(35, 29, 79, .25) 45%, transparent 65%);
+}
+
+/* Le dégradé du titre devient un or clair, lisible sur le ciel */
+.hero .degrade {
+    background: linear-gradient(90deg, #F3D9A4, #E8B98A, #F3D9A4);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+@media (max-width: 1024px) {
+    .hero::after {
+        background: linear-gradient(180deg, rgba(35, 29, 79, .55) 0%, rgba(35, 29, 79, .35) 60%, rgba(35, 29, 79, .2) 100%);
+    }
+}
+
+/* Brume : trois nappes floues qui dérivent lentement */
+.brume {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.brume__nappe {
+    position: absolute;
+    left: -20%;
+    width: 140%;
+    height: 22%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(240, 205, 190, .45), transparent 70%);
+    filter: blur(18px);
+    animation: brume-derive 40s ease-in-out infinite alternate;
+}
+
+.brume__nappe--1 { top: 52%; }
+.brume__nappe--2 { top: 64%; opacity: .7; animation-duration: 55s; animation-direction: alternate-reverse; }
+.brume__nappe--3 { top: 76%; opacity: .5; animation-duration: 70s; }
+
+@keyframes brume-derive {
+    from { transform: translateX(-6%); }
+    to   { transform: translateX(6%); }
+}
+
+/* Profondeur au défilement : chaque plan part à sa propre vitesse,
+   et à l'arrivée (après la porte) le paysage se "pose" doucement. */
+@supports (view-timeline-name: --a) {
+    .plan--ciel   { animation: plan-ciel   linear both; }
+    .plan--loin   { animation: plan-loin   linear both; }
+    .plan--milieu { animation: plan-milieu linear both; }
+    .plan--pres   { animation: plan-pres   linear both; }
+
+    .plan {
+        animation-timeline: --hero;
+        animation-range: entry 0% exit 100%;
+    }
+
+    @keyframes plan-ciel   { 0% { transform: scale(1.12); } 50% { transform: scale(1); } 100% { transform: translateY(260px); } }
+    @keyframes plan-loin   { 0% { transform: scale(1.10); } 50% { transform: scale(1); } 100% { transform: translateY(170px); } }
+    @keyframes plan-milieu { 0% { transform: scale(1.07); } 50% { transform: scale(1); } 100% { transform: translateY(90px); } }
+    @keyframes plan-pres   { 0% { transform: scale(1.04); } 50% { transform: scale(1); } 100% { transform: translateY(0); } }
+}
+
+
+/* ---------- TRANSITION DÉSERT -> PAGE ----------
+   Un dégradé long (brume de sable) + une dune crème au premier plan
+   qui devient le fond de la section suivante : aucune coupure nette. */
+.fondu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 42vh;
+    z-index: 3; /* au-dessus du voile sombre du hero */
+    pointer-events: none;
+    background: linear-gradient(180deg,
+        rgba(248, 238, 223, 0) 0%,
+        rgba(232, 205, 190, .35) 40%,
+        rgba(248, 238, 223, .9) 80%,
+        var(--sable) 100%);
+}
+
+.fondu__dune {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 55%;
+}
+
+/* Grains de sable très fins, discrets */
+.fondu .sable-chute {
+    position: absolute;
+    inset: 0;
+    height: auto;
+    background: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+    overflow: hidden;
+}
+
+.fondu .sable-chute i,
+.fondu .sable-chute i:nth-child(3n),
+.fondu .sable-chute i:nth-child(4n) {
+    width: var(--taille);
+    height: var(--taille);
+    border-radius: 50%;
+    background: rgba(150, 100, 70, .55);
+    box-shadow: none;
+}
+
+
+/* Haut des sections couleur sable : une dune douce au lieu d'une ligne droite */
+.section--sable::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -79px;
+    height: 80px;
+    pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 62 C180 30 360 18 560 40 C760 62 920 76 1120 50 C1260 32 1360 26 1440 34 V80 H0Z' fill='%23EAD7B8'/%3E%3C/svg%3E") no-repeat bottom / 100% 100%;
+}
+
+
+/* ---------- 17. RESPONSIVE ---------- */
+
+/* Tablette */
+@media (max-width: 1024px) {
+    .hero__contenu,
+    .lumia,
+    .contact {
+        grid-template-columns: 1fr;
+    }
+
+    .hero__contenu {
+        text-align: center;
+    }
+
+    .hero__intro {
+        margin-inline: auto;
+    }
+
+    .hero__boutons,
+    .chiffres {
+        justify-content: center;
+    }
+
+    .hero__fee {
+        width: min(260px, 70%);
+        grid-row: 1; /* la fée passe au-dessus du texte */
+    }
+
+    .profils,
+    .temoignages {
+        grid-template-columns: 1fr;
+        max-width: 560px;
+        margin-inline: auto;
+    }
+
+    .profil--vedette,
+    .profil--vedette:hover {
+        transform: none;
+    }
+
+    .pied__grille {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .histoire__grille {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
+/* Le menu passe en mode "burger" */
+@media (max-width: 1180px) {
+    .burger {
+        display: block;
+    }
+
+    .nav {
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+        padding: 28px 20px 34px;
+        background: var(--nuit);
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        /* Menu fermé : caché au-dessus */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-12px);
+        transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+    }
+
+    /* Menu ouvert quand la case est cochée */
+    .menu-toggle:checked ~ .nav {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav__liens {
+        flex-direction: column;
+        gap: 18px;
+        font-size: 1.1rem;
+    }
+
+    .nav__actions {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .hero {
+        padding-top: 110px;
+    }
+
+    .hero__boutons .bouton {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .chiffres {
+        gap: 22px;
+    }
+
+    .chiffres strong {
+        font-size: 1.4rem;
+    }
+
+    .soleil {
+        right: -10%;
+        bottom: 14%;
+    }
+
+    .etapes {
+        grid-template-columns: 1fr;
+    }
+
+    .etapes::before {
+        display: none;
+    }
+
+    .formulaire__ligne {
+        grid-template-columns: 1fr;
+    }
+
+    .formulaire .bouton {
+        align-self: stretch;
+        justify-content: center;
+    }
+
+    .newsletter__form {
+        flex-direction: column;
+        border-radius: 20px;
+    }
+
+    .newsletter__form input {
+        padding: 12px;
+    }
+
+    .pied__grille {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ---------- 18. ACCESSIBILITÉ ----------
+   Si l'utilisateur a demandé à son système de réduire les
+   animations, on les coupe presque toutes. */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .bulle {
+        opacity: 1;
+    }
+
+    .apparition {
+        animation: none !important;
+    }
+}
+
+
+/* =========================================================
+   19. PAGES DU SITE NEXT.JS (connexion, compte, formulaires)
+   Ajouté pour la version Next.js + Supabase de Businesseur.
+   ========================================================= */
+
+/* Fond nuit plein écran pour les pages Connexion et Mon compte */
+.auth {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 130px 20px 60px;
+    background:
+        radial-gradient(circle at 80% 10%, rgba(211, 138, 69, .25), transparent 45%),
+        linear-gradient(180deg, var(--nuit) 0%, var(--nuit-2) 60%, var(--crepuscule) 100%);
+}
+
+.auth .formulaire {
+    width: min(480px, 100%);
+}
+
+.auth .formulaire .bouton {
+    align-self: stretch;
+    justify-content: center;
+}
+
+.auth__intro {
+    color: var(--texte-doux);
+    margin-top: -8px;
+}
+
+.auth__bascule {
+    text-align: center;
+    color: var(--texte-doux);
+    font-size: .95rem;
+}
+
+.auth__bascule button {
+    border: none;
+    background: none;
+    font: inherit;
+    font-weight: 600;
+    color: var(--oasis);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+}
+
+/* En-tête simple des pages Connexion / Compte */
+.entete--simple .entete__contenu {
+    gap: 20px;
+}
+
+/* Choix du profil (entrepreneur, mentor, investisseur) */
+.choix-profil {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    border: none;
+}
+
+.choix-profil legend {
+    font-size: .85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.choix-profil label {
+    display: grid;
+    place-items: center;
+    padding: 12px 8px;
+    border: 1.5px solid var(--sable-fonce);
+    border-radius: 16px;
+    background: var(--sable);
+    font-size: .9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition);
+}
+
+.choix-profil input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.choix-profil label:has(input:checked) {
+    border-color: var(--or);
+    background: var(--blanc);
+    box-shadow: 0 0 0 4px rgba(211, 138, 69, .15);
+}
+
+.choix-profil label:has(input:focus-visible) {
+    outline: 2px solid var(--oasis);
+    outline-offset: 2px;
+}
+
+/* Messages de retour des formulaires */
+.message-form {
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-size: .92rem;
+}
+
+.message-form--ok {
+    background: rgba(79, 125, 181, .12);
+    color: #2F5A8C;
+}
+
+.message-form--erreur {
+    background: rgba(179, 98, 127, .12);
+    color: #8E3F5C;
+}
+
+.bouton:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Contour visible au clavier */
+:focus-visible {
+    outline: 2px solid var(--oasis);
+    outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+    .choix-profil {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Choix multiples (spécialités du mentor) : étiquettes qui passent à la ligne */
+.choix-multiple {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    border: none;
+}
+
+.choix-multiple legend,
+.choix-stade legend {
+    font-size: .85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.choix-multiple label {
+    padding: 9px 14px;
+    border: 1.5px solid var(--sable-fonce);
+    border-radius: 999px;
+    background: var(--sable);
+    font-size: .88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition);
+}
+
+.choix-multiple input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.choix-multiple label:has(input:checked) {
+    border-color: var(--oasis);
+    background: var(--blanc);
+    box-shadow: 0 0 0 4px rgba(79, 125, 181, .15);
+}
+
+.choix-multiple label:has(input:focus-visible) {
+    outline: 2px solid var(--oasis);
+    outline-offset: 2px;
+}
+
+.choix-aide {
+    width: 100%;
+    font-size: .82rem;
+    color: var(--texte-doux);
+}
