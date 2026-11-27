@@ -31,7 +31,6 @@ export default function Accueil() {
               <li><a href="/projets">Projets</a></li>
               <li><a href="/businesseurs">Les Businesseurs</a></li>
               <li><a href="/gazette">La Gazette</a></li>
-              <li><a href="/don">Faire un don</a></li>
             </ul>
             <div className="nav__actions">
               <Langue />

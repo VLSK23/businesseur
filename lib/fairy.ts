@@ -190,14 +190,6 @@ const REGLES: Regle[] = [
     },
   },
   {
-    sujet: "don",
-    motsCles: ["don", "soutenir", "donner"],
-    reponse: {
-      texte: "Merci de vouloir soutenir Businesseur ! Chaque don nous aide à accompagner plus de projets.",
-      liens: [{ texte: "Faire un don", href: "/don" }],
-    },
-  },
-  {
     sujet: "contact",
     motsCles: ["contact", "humain", "equipe", "parler a", "joindre", "email", "mail"],
     reponse: {
@@ -232,7 +224,7 @@ export function repondreFairy(message: string): ReponseFairy {
     };
   }
 
-  // Mots entiers pour les mots-clés courts (ex. « ia », « don »), sinon « contient »
+  // Mots entiers pour les mots-clés courts (ex. « ia », « fee »), sinon « contient »
   const mots = new Set(texte.split(/[^a-z0-9'-]+/));
   for (const regle of REGLES) {
     const trouve = regle.motsCles.some((m) => {
