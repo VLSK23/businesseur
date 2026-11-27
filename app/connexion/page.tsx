@@ -3,6 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import EnteteSimple from "@/components/EnteteSimple";
+import ListeDeroulanteMultiple from "@/components/ListeDeroulanteMultiple";
 import { SPECIALITES_MENTOR, STADES_PROJET } from "@/lib/options";
 import { MESSAGE_NON_CONFIGURE, supabase, supabaseConfigure } from "@/lib/supabase";
 
@@ -134,27 +135,13 @@ export default function ConnexionPage() {
               )}
 
               {profil === "mentor" && (
-                <fieldset className="choix-multiple">
-                  <legend>Quelles spécialités souhaitez-vous accompagner ?</legend>
-                  <p className="choix-aide">Plusieurs choix possibles.</p>
-                  {SPECIALITES_MENTOR.map((s) => (
-                    <label key={s.valeur}>
-                      <input
-                        type="checkbox"
-                        value={s.valeur}
-                        checked={specialites.includes(s.valeur)}
-                        onChange={(e) =>
-                          setSpecialites(
-                            e.target.checked
-                              ? [...specialites, s.valeur]
-                              : specialites.filter((v) => v !== s.valeur),
-                          )
-                        }
-                      />
-                      {s.libelle}
-                    </label>
-                  ))}
-                </fieldset>
+                <ListeDeroulanteMultiple
+                  label="Quelles spécialités souhaitez-vous accompagner ?"
+                  placeholder="Choisissez une ou plusieurs spécialités…"
+                  options={SPECIALITES_MENTOR}
+                  valeurs={specialites}
+                  onChange={setSpecialites}
+                />
               )}
 
               <div className="champ">

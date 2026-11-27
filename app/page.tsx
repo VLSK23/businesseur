@@ -697,7 +697,9 @@ export default function Accueil() {
             <a href="/connexion?mode=inscription" className="bouton bouton--or">Créer mon compte</a>
           </div>
         </div>
-        <p className="pied__bas">© 2026 Businesseur · Tous droits réservés · Mentions légales</p>
+        <p className="pied__bas">
+          © 2026 Businesseur · <a href="/conditions">Tous droits réservés</a> · <a href="/mentions-legales">Mentions légales</a>
+        </p>
       </footer>
     </>
   );

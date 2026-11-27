@@ -3,6 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import EnteteSimple from "@/components/EnteteSimple";
+import ListeDeroulanteMultiple from "@/components/ListeDeroulanteMultiple";
 import { SPECIALITES_MENTOR, STADES_PROJET } from "@/lib/options";
 import { supabase, supabaseConfigure } from "@/lib/supabase";
 
@@ -122,29 +123,13 @@ export default function ComptePage() {
             )}
 
             {profil.profil === "mentor" && (
-              <fieldset className="choix-multiple">
-                <legend>Quelles spécialités souhaitez-vous accompagner ?</legend>
-                {SPECIALITES_MENTOR.map((s) => {
-                  const liste = profil.specialites ?? [];
-                  return (
-                    <label key={s.valeur}>
-                      <input
-                        type="checkbox"
-                        checked={liste.includes(s.valeur)}
-                        onChange={(e) =>
-                          setProfil({
-                            ...profil,
-                            specialites: e.target.checked
-                              ? [...liste, s.valeur]
-                              : liste.filter((v) => v !== s.valeur),
-                          })
-                        }
-                      />
-                      {s.libelle}
-                    </label>
-                  );
-                })}
-              </fieldset>
+              <ListeDeroulanteMultiple
+                label="Quelles spécialités souhaitez-vous accompagner ?"
+                placeholder="Choisissez une ou plusieurs spécialités…"
+                options={SPECIALITES_MENTOR}
+                valeurs={profil.specialites ?? []}
+                onChange={(v) => setProfil({ ...profil, specialites: v })}
+              />
             )}
 
             {retour && (
