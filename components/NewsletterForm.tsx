@@ -7,7 +7,7 @@ import { MESSAGE_NON_CONFIGURE, supabase, supabaseConfigure } from "@/lib/supaba
 export default function NewsletterForm() {
   const [email, setEmail] = useState("");
   const [envoi, setEnvoi] = useState(false);
-  const [retour, setRetour] = useState<{ ok: boolean; texte: string } | null>(null);
+  const [retour, setRetour] = useState<{ ok: boolean; texte: string; detail?: string } | null>(null);
 
   async function envoyer(e: FormEvent) {
     e.preventDefault();
@@ -22,7 +22,9 @@ export default function NewsletterForm() {
     if (error && error.code === "23505") {
       setRetour({ ok: true, texte: "Vous êtes déjà abonné·e à la gazette." });
     } else if (error) {
-      setRetour({ ok: false, texte: "Oups, l'inscription a échoué. Réessayez dans un instant." });
+      // Le détail (en anglais, venant de Supabase) aide à trouver la cause : clé, table, règles…
+      console.error("Newsletter :", error);
+      setRetour({ ok: false, texte: "Oups, l'inscription a échoué. Réessayez dans un instant.", detail: error.message });
     } else {
       setRetour({ ok: true, texte: "Merci ! Vous recevrez la prochaine gazette." });
       setEmail("");
@@ -49,6 +51,7 @@ export default function NewsletterForm() {
       {retour && (
         <p className={`message-form ${retour.ok ? "message-form--ok" : "message-form--erreur"}`} role="status">
           {retour.texte}
+          {retour.detail && <small className="message-form__detail" translate="no">{retour.detail}</small>}
         </p>
       )}
     </>

@@ -3600,3 +3600,11 @@ html.traduction-en-attente body {
     margin-top: 4px;
     font-size: .85rem;
 }
+
+/* Détail technique sous un message d'erreur (aide à trouver la cause) */
+.message-form__detail {
+    display: block;
+    margin-top: 4px;
+    font-size: .8rem;
+    opacity: .75;
+}
