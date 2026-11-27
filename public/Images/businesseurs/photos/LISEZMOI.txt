@@ -1,0 +1,13 @@
+Photos des profils fictifs de la page « Les Businesseurs »
+
+Dépose ici 4 visages générés par IA (des personnes qui n'existent pas),
+par exemple depuis https://thispersondoesnotexist.com (actualise la page pour changer de visage,
+puis clic droit > « Enregistrer l'image sous… »).
+
+Noms exacts à utiliser (format .jpg) :
+  claire-lefevre.jpg   (mentor, marketing)
+  marc-delorme.jpg     (mentor, vente)
+  fatou-traore.jpg     (mentor, finance)
+  thomas-bernard.jpg   (investisseur)
+
+Tant qu'une photo manque, le site affiche le portrait dessiné à la place.

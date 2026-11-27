@@ -3458,3 +3458,16 @@ h1, h2, h3, h4 {
     margin-top: 6px;
     color: var(--texte-doux);
 }
+
+/* Mention discrète sous les mentors */
+.mention-fictif {
+    margin-top: 18px;
+    text-align: center;
+    font-size: .8rem;
+    color: var(--texte-doux);
+    opacity: .8;
+}
+
+.avatar-photo {
+    object-fit: cover;
+}

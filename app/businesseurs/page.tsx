@@ -1,5 +1,6 @@
 import Link from "next/link";
 import EntetePages from "@/components/EntetePages";
+import PhotoProfil from "@/components/PhotoProfil";
 import { MANTRA_INVESTISSEUR, NOUVEAUX_ENTREPRENEURS, NOUVEAUX_MENTORS, type Arrivant } from "@/lib/communaute";
 
 export const metadata = {
@@ -28,8 +29,7 @@ function CarteMentor({ a }: { a: Arrivant }) {
     <figure className="temoignage">
       <blockquote>{a.texte}</blockquote>
       <figcaption>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="avatar-photo" src={a.image} alt={`Portrait de ${a.nom}`} />
+        <PhotoProfil className="avatar-photo" photo={a.photo} dessin={a.image} alt={`Portrait de ${a.nom}`} />
         <div><strong>{a.nom}</strong><small>{a.detail}</small></div>
       </figcaption>
     </figure>
@@ -59,6 +59,7 @@ export default function BusinesseursPage() {
             <div className="temoignages">
               {NOUVEAUX_MENTORS.map((a) => <CarteMentor key={a.nom} a={a} />)}
             </div>
+            <p className="mention-fictif">Profils et photos fictifs, créés pour la démonstration.</p>
           </div>
         </section>
 
@@ -67,8 +68,7 @@ export default function BusinesseursPage() {
             <p className="surtitre">Le mantra de l&apos;investisseur</p>
             <blockquote>« {m.mantra} »</blockquote>
             <div className="mantra__auteur">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="avatar-photo" src={m.image} alt={`Portrait de ${m.nom}`} />
+              <PhotoProfil className="avatar-photo" photo={m.photo} dessin={m.image} alt={`Portrait de ${m.nom}`} />
               <div><strong>{m.nom}</strong><small>{m.role}</small></div>
             </div>
             <h2>Ses 3 conseils aux entrepreneurs</h2>
