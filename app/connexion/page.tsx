@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import BienvenueFairy from "@/components/BienvenueFairy";
@@ -29,6 +30,7 @@ export default function ConnexionPage() {
   const [envoi, setEnvoi] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
+  const [aideIdentifiant, setAideIdentifiant] = useState(false); // encadré « Identifiant oublié ? »
   // Après une inscription réussie : Fairy apparaît (avec ou sans confirmation par e-mail)
   const [bienvenue, setBienvenue] = useState<{ confirmationEmail: boolean } | null>(null);
 
@@ -175,6 +177,31 @@ export default function ConnexionPage() {
               autoComplete={mode === "connexion" ? "current-password" : "new-password"}
             />
           </div>
+
+          {mode === "connexion" && (
+            <div className="auth__oublis">
+              <Link href={`/mot-de-passe-oublie${email ? `?email=${encodeURIComponent(email)}` : ""}`}>
+                Mot de passe oublié ?
+              </Link>
+              <button type="button" onClick={() => setAideIdentifiant(!aideIdentifiant)} aria-expanded={aideIdentifiant}>
+                Identifiant oublié ?
+              </button>
+            </div>
+          )}
+
+          {mode === "connexion" && aideIdentifiant && (
+            <div className="auth__aide" role="note">
+              <strong>Votre identifiant, c&apos;est votre adresse e-mail.</strong>
+              <p>
+                Essayez les adresses que vous utilisez habituellement, et cherchez « Businesseur » dans vos e-mails :
+                l&apos;adresse qui a reçu notre message de bienvenue est la bonne.
+              </p>
+              <p>
+                Toujours bloqué·e ? <Link href="/#contact">Écrivez à l&apos;équipe</Link> ou{" "}
+                <Link href="/fairy">demandez à Fairy</Link>.
+              </p>
+            </div>
+          )}
 
           {erreur && <p className="message-form message-form--erreur" role="alert">{erreur}</p>}
           {info && <p className="message-form message-form--ok" role="status">{info}</p>}

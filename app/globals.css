@@ -3417,3 +3417,44 @@ h1, h2, h3, h4 {
         animation: none;
     }
 }
+
+
+/* =========================================================
+   24. MOT DE PASSE ET IDENTIFIANT OUBLIÉS
+   ========================================================= */
+
+.auth__oublis {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: -6px;
+    font-size: .9rem;
+}
+
+.auth__oublis a,
+.auth__oublis button,
+.auth__lien,
+.auth__aide a {
+    border: none;
+    padding: 0;
+    background: none;
+    font: inherit;
+    font-weight: 600;
+    color: var(--oasis);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.auth__aide {
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: #F7EFE3;
+    color: var(--texte);
+    font-size: .92rem;
+}
+
+.auth__aide p {
+    margin-top: 6px;
+    color: var(--texte-doux);
+}

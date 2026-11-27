@@ -179,6 +179,18 @@ const REGLES: Regle[] = [
     },
   },
   {
+    sujet: "acces-oublie",
+    motsCles: ["mot de passe", "identifiant", "oublie", "perdu mon", "reinitialiser"],
+    reponse: {
+      texte:
+        "Pas de panique ! Votre identifiant, c'est votre adresse e-mail. Pour le mot de passe, je vous envoie un lien pour en choisir un nouveau :",
+      liens: [
+        { texte: "Mot de passe oublié", href: "/mot-de-passe-oublie" },
+        { texte: "Écrire à l'équipe", href: "/#contact" },
+      ],
+    },
+  },
+  {
     sujet: "inscription",
     motsCles: ["inscri", "compte", "rejoindre", "s'inscrire", "connexion", "connecter"],
     reponse: {
