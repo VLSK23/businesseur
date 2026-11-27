@@ -3186,3 +3186,21 @@ h1, h2, h3, h4 {
         animation: none;
     }
 }
+
+
+/* Notre ambition (section Notre histoire) : la phrase mise en avant */
+.histoire__grille p.histoire__ambition,
+.histoire__ambition {
+    margin-top: 22px;
+    padding: 6px 0 6px 20px;
+    border-left: 4px solid var(--or-clair);
+    font-family: var(--police-titre);
+    font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+    line-height: 1.35;
+    color: var(--texte);
+}
+
+.section__tete .histoire__ambition {
+    display: inline-block;
+    text-align: left;
+}

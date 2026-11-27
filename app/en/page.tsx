@@ -60,6 +60,9 @@ export default function EnglishHome() {
                 Businesseur connects entrepreneurs, mentors and investors, guided by Fairy, our AI fairy.
                 Like an oasis in the desert, it is the place where projects find what they need to grow.
               </p>
+              <p className="histoire__ambition">
+                Our ambition is simple: to connect the right projects with the right people.
+              </p>
             </header>
 
             <div className="grille-cartes">

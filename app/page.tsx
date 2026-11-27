@@ -483,6 +483,10 @@ export default function Accueil() {
                 Guidée par Fairy, notre intelligence artificielle, chaque rencontre est choisie avec
                 soin pour faire grandir les projets qui comptent.
               </p>
+              {/* Notre ambition, mise en avant */}
+              <p className="histoire__ambition">
+                Notre ambition est simple : connecter les bons projets aux bonnes personnes.
+              </p>
             </div>
           </div>
         </section>
