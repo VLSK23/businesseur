@@ -28,6 +28,7 @@ export default function Accueil() {
           <nav className="nav">
             <ul className="nav__liens">
               <li><a href="#histoire">Notre histoire</a></li>
+              <li><a href="/roles">Les rôles</a></li>
               <li><a href="/projets">Projets</a></li>
               <li><a href="/businesseurs">Les Businesseurs</a></li>
               <li><a href="/gazette">La Gazette</a></li>
@@ -697,7 +698,7 @@ export default function Accueil() {
             <a href="/businesseurs">Les Businesseurs</a>
             <a href="/gazette">La Gazette du Businesseur</a>
             <a href="#lumia">Fairy, la fée IA</a>
-            <a href="#etapes">Comment ça marche</a>
+            <a href="/roles">Comment ça marche</a>
             <a href="#contact">Contact</a>
           </div>
           <div>

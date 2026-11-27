@@ -3608,3 +3608,143 @@ html.traduction-en-attente body {
     font-size: .8rem;
     opacity: .75;
 }
+
+/* 27. Page « Le rôle de chacun » (/roles) */
+.roles__sommaire {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: -10px 0 48px;
+}
+
+.roles__pastille {
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: .9rem;
+    background: var(--blanc);
+    box-shadow: var(--ombre);
+    transition: transform var(--transition);
+}
+
+.roles__pastille:hover {
+    transform: translateY(-2px);
+}
+
+.roles__pastille--sable { color: var(--or); }
+.roles__pastille--oasis { color: var(--oasis); }
+.roles__pastille--nuit { color: var(--nuit); }
+.roles__pastille--fairy { color: var(--terracotta); }
+
+.role {
+    scroll-margin-top: 100px;
+    margin-bottom: 40px;
+    padding: 40px;
+    background: var(--blanc);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+    border-top: 6px solid var(--or);
+}
+
+.role--oasis { border-top-color: var(--oasis); }
+.role--nuit { border-top-color: var(--nuit); }
+
+.role__tete h2 {
+    font-family: var(--police-titre);
+    font-size: 2rem;
+    color: var(--texte);
+}
+
+.role__tete p {
+    margin: 6px 0 28px;
+    color: var(--texte-doux);
+    font-size: 1.1rem;
+}
+
+.role h3 {
+    margin-bottom: 10px;
+    font-family: var(--police-titre);
+    font-size: 1.25rem;
+    color: var(--texte);
+}
+
+.role__colonnes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+}
+
+.role__etapes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin: 10px 0 32px;
+    list-style: none;
+}
+
+.role__etapes li {
+    padding: 22px;
+    border-radius: 16px;
+    background: var(--sable);
+    text-align: center;
+}
+
+.role__etapes .etape__numero {
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 12px;
+    font-size: 1.1rem;
+}
+
+.role__etapes h4 {
+    margin-bottom: 6px;
+    color: var(--texte);
+}
+
+.role__etapes p {
+    color: var(--texte-doux);
+    font-size: .95rem;
+}
+
+.role-fairy {
+    max-width: 760px;
+    text-align: center;
+}
+
+.role-fairy h2 {
+    margin: 8px 0 16px;
+}
+
+.role-fairy__liste {
+    margin: 24px auto 32px;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+    max-width: 560px;
+}
+
+.role-fairy__liste li {
+    padding: 10px 0 10px 30px;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, .12);
+}
+
+.role-fairy__liste li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--or-clair);
+}
+
+@media (max-width: 760px) {
+    .role {
+        padding: 26px 20px;
+    }
+
+    .role__colonnes,
+    .role__etapes {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+}

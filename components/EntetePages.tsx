@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Langue from "@/components/Langue";
 
-// En-tête des pages Projets, Les Businesseurs et La Gazette du Businesseur.
+// En-tête des pages Les rôles, Projets, Les Businesseurs et La Gazette du Businesseur.
 export default function EntetePages() {
   return (
     <header className="entete">
@@ -12,6 +12,7 @@ export default function EntetePages() {
           <span>Business<em>eur</em></span>
         </Link>
         <nav className="nav-pages" aria-label="Pages">
+          <Link href="/roles">Les rôles</Link>
           <Link href="/projets">Projets</Link>
           <Link href="/businesseurs">Les Businesseurs</Link>
           <Link href="/gazette">La Gazette</Link>
