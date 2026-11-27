@@ -38,6 +38,9 @@ export default async function ProjetPage({ params }: PageProps<"/projets/[slug]"
               </div>
             </header>
 
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="projet__image" src={projet.image} alt={`Illustration du projet ${projet.nom}`} />
+
             <ul className="projet__chiffres">
               {projet.chiffres.map((c) => (
                 <li key={c.libelle}><strong>{c.valeur}</strong><span>{c.libelle}</span></li>

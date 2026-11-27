@@ -2918,3 +2918,19 @@ h1, h2, h3, h4 {
         display: none;
     }
 }
+
+/* Images des projets (carte de la liste et haut de la fiche) */
+.carte__image--projet {
+    aspect-ratio: 400 / 250;
+}
+
+.projet__image {
+    display: block;
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 400 / 250;
+    object-fit: cover;
+    border-radius: var(--rayon);
+    margin-top: 40px;
+    box-shadow: var(--ombre);
+}

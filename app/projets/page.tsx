@@ -22,7 +22,9 @@ export default function ProjetsPage() {
 
             <div className="grille-cartes">
               {PROJETS.map((p) => (
-                <Link key={p.slug} href={`/projets/${p.slug}`} className="carte">
+                <Link key={p.slug} href={`/projets/${p.slug}`} className="carte carte--image">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="carte__image carte__image--projet" src={p.image} alt={`Illustration du projet ${p.nom}`} />
                   <span className="carte__badge">{p.stade}</span>
                   <h2>{p.nom}</h2>
                   <p>{p.accroche}</p>

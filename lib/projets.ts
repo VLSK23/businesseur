@@ -13,11 +13,13 @@ export type Projet = {
   points: { titre: string; texte: string }[];
   chiffres: { valeur: string; libelle: string }[];
   besoins: string[];
+  image: string; // illustration du projet (public/Images/...)
 };
 
 export const PROJETS: Projet[] = [
   {
     slug: "woufhome",
+    image: "/Images/businesseurs/woufhome.svg",
     nom: "Wouf'Home",
     accroche: "La niche robotisée qui se nettoie toute seule et garde votre chien au chaud.",
     secteur: "Animaux & objets connectés",
@@ -59,6 +61,7 @@ export const PROJETS: Projet[] = [
   },
   {
     slug: "terre-et-bocal",
+    image: "/Images/projets/terre-et-bocal.svg",
     nom: "Terre & Bocal",
     accroche: "L'épicerie vrac qui vient jusqu'aux villages.",
     secteur: "Alimentation & zéro déchet",
@@ -83,6 +86,7 @@ export const PROJETS: Projet[] = [
   },
   {
     slug: "kodama",
+    image: "/Images/businesseurs/kodama.svg",
     nom: "Kodama",
     accroche: "Le covoiturage du quotidien pour les zones rurales.",
     secteur: "Mobilité",
@@ -110,6 +114,7 @@ export const PROJETS: Projet[] = [
   },
   {
     slug: "atlas-food",
+    image: "/Images/projets/atlas-food.svg",
     nom: "Atlas Food",
     accroche: "Des plats marocains faits maison, livrés surgelés partout en France.",
     secteur: "Alimentation",
