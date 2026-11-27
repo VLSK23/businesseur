@@ -44,7 +44,7 @@ type Regle = { sujet: string; motsCles: string[]; reponse: Omit<ReponseFairy, "s
 const REGLES: Regle[] = [
   {
     sujet: "salutation",
-    motsCles: ["bonjour", "salut", "hello", "coucou", "bonsoir", "hey"],
+    motsCles: ["bonjour", "salut", "hello", "coucou", "bonsoir", "hey", "hi", "good morning", "good evening"],
     reponse: {
       texte: "Bonjour et bienvenue dans l'oasis ! Êtes-vous entrepreneur, mentor ou investisseur ?",
       suggestions: ["Je suis entrepreneur", "Je suis mentor", "Je suis investisseur"],
@@ -52,7 +52,7 @@ const REGLES: Regle[] = [
   },
   {
     sujet: "merci",
-    motsCles: ["merci", "super", "genial", "top", "parfait"],
+    motsCles: ["merci", "super", "genial", "top", "parfait", "thanks", "thank you", "great", "perfect", "awesome"],
     reponse: {
       texte: "Avec plaisir ! Je reste là si vous avez une autre question 🌴",
       suggestions: ["Voir les projets", "Lire La Gazette", "S'inscrire"],
@@ -60,14 +60,14 @@ const REGLES: Regle[] = [
   },
   {
     sujet: "mantra",
-    motsCles: ["mantra", "conseil d'investisseur", "conseils d'investisseur"],
+    motsCles: ["mantra", "conseil d'investisseur", "conseils d'investisseur", "investor tips", "investor advice"],
     reponse: {
       texte: "« Je n'investis pas dans une idée. J'investis dans une équipe qui sait encore apprendre. » C'est le mantra de Thomas Bernard, business angel. Ses 3 conseils sont sur la page Les Businesseurs.",
       liens: [{ texte: "Lire ses conseils", href: "/businesseurs" }],
     },
   },  {
     sujet: "trouver-mentor",
-    motsCles: ["trouver un mentor", "besoin d'aide", "aide", "accompagnement"],
+    motsCles: ["trouver un mentor", "besoin d'aide", "aide", "accompagnement", "find a mentor", "need help", "help", "support"],
     reponse: {
       texte: "Je m'en occupe ! Créez votre espace entrepreneur et je vous proposerai les mentors qui connaissent votre secteur. En attendant, voici comment bien choisir :",
       liens: [
@@ -77,7 +77,7 @@ const REGLES: Regle[] = [
     },
   },  {
     sujet: "entrepreneur",
-    motsCles: ["entrepreneur", "mon projet", "ma startup", "creer", "lancer", "idee", "fondateur", "fondatrice"],
+    motsCles: ["entrepreneur", "mon projet", "ma startup", "creer", "lancer", "idee", "fondateur", "fondatrice", "my project", "my startup", "start", "launch", "idea", "founder"],
     reponse: {
       texte:
         "Merveilleux ! Sur Businesseur, je vous présente des mentors qui connaissent votre secteur, puis des investisseurs quand vous êtes prêt·e. Commencez par créer votre espace : je vous demanderai à quel stade est votre projet.",
@@ -90,7 +90,7 @@ const REGLES: Regle[] = [
   },
   {
     sujet: "mentor",
-    motsCles: ["mentor", "accompagner", "partager mon experience", "conseiller", "coach"],
+    motsCles: ["mentor", "accompagner", "partager mon experience", "conseiller", "coach", "share my experience", "advise", "mentoring"],
     reponse: {
       texte:
         "Merci de vouloir transmettre ! Choisissez les spécialités que vous souhaitez accompagner (marketing, finance, vente…) et je vous proposerai les projets qui en ont le plus besoin.",
@@ -103,7 +103,7 @@ const REGLES: Regle[] = [
   },
   {
     sujet: "investisseur",
-    motsCles: ["investisseur", "investir", "business angel", "investissement", "capital"],
+    motsCles: ["investisseur", "investir", "business angel", "investissement", "capital", "investor", "invest", "investment"],
     reponse: {
       texte:
         "Bienvenue ! Je sélectionne pour vous des projets déjà accompagnés par nos mentors, à chaque étape : prototype, premiers clients, levée de fonds.",
@@ -117,7 +117,7 @@ const REGLES: Regle[] = [
 
   {
     sujet: "levee",
-    motsCles: ["lever", "levee", "fonds", "financement", "argent", "financer", "pret"],
+    motsCles: ["lever", "levee", "fonds", "financement", "argent", "financer", "pret", "raise", "fundraise", "fundraising", "funding", "funds", "money", "loan"],
     reponse: {
       texte:
         "Pour une première levée, on avance par étapes : love money, prêts d'honneur, puis business angels. J'ai deux guides pour vous dans La Gazette.",
@@ -138,7 +138,7 @@ const REGLES: Regle[] = [
   },
   {
     sujet: "statut",
-    motsCles: ["statut", "sasu", "sas", "micro", "auto-entrepreneur", "juridique", "societe"],
+    motsCles: ["statut", "sasu", "sas", "micro", "auto-entrepreneur", "juridique", "societe", "legal status", "legal", "company", "business structure"],
     reponse: {
       texte: "Micro-entreprise pour tester, SASU si vous êtes seul·e mais ambitieux·se, SAS pour lever des fonds à plusieurs. Tout est expliqué ici :",
       liens: [{ texte: "Quel statut choisir ?", href: "/gazette/choisir-son-statut" }],
@@ -147,7 +147,7 @@ const REGLES: Regle[] = [
 
   {
     sujet: "clients",
-    motsCles: ["client", "vendre", "vente", "marketing"],
+    motsCles: ["client", "vendre", "vente", "marketing", "customer", "customers", "sell", "sales"],
     reponse: {
       texte: "Les premiers clients se trouvent rarement avec de la publicité. Voici une méthode concrète :",
       liens: [{ texte: "Trouver ses 10 premiers clients", href: "/gazette/dix-premiers-clients" }],
@@ -155,7 +155,7 @@ const REGLES: Regle[] = [
   },
   {
     sujet: "projets",
-    motsCles: ["projet", "projets", "startups", "decouvrir"],
+    motsCles: ["projet", "projets", "startups", "decouvrir", "project", "projects", "discover"],
     reponse: {
       texte: "Voici les projets qui grandissent dans l'oasis : une niche robotisée, une épicerie vrac itinérante, du covoiturage rural et des plats marocains faits maison.",
       liens: [{ texte: "Voir tous les projets", href: "/projets" }],
@@ -164,7 +164,7 @@ const REGLES: Regle[] = [
   },
   {
     sujet: "gazette",
-    motsCles: ["gazette", "article", "articles", "lire", "guide", "newsletter", "actu"],
+    motsCles: ["gazette", "article", "articles", "lire", "guide", "newsletter", "actu", "read", "news"],
     reponse: {
       texte: "La Gazette du Businesseur rassemble des guides courts écrits par nos mentors : idée, statut, pitch, financement, premiers clients.",
       liens: [{ texte: "Lire La Gazette", href: "/gazette" }],
@@ -172,7 +172,7 @@ const REGLES: Regle[] = [
   },
   {
     sujet: "application",
-    motsCles: ["appli", "application", "telecharger", "mobile", "telephone", "iphone", "android"],
+    motsCles: ["appli", "application", "telecharger", "mobile", "telephone", "iphone", "android", "app", "download", "phone"],
     reponse: {
       texte: "L'application Businesseur arrive bientôt ! Touchez le palmier pour la découvrir et être prévenu·e de sa sortie.",
       liens: [{ texte: "🌴 Découvrir l'application", href: LIEN_APPLICATION }],
@@ -180,7 +180,7 @@ const REGLES: Regle[] = [
   },
   {
     sujet: "acces-oublie",
-    motsCles: ["mot de passe", "identifiant", "oublie", "perdu mon", "reinitialiser"],
+    motsCles: ["mot de passe", "identifiant", "oublie", "perdu mon", "reinitialiser", "password", "username", "forgot", "lost my", "reset"],
     reponse: {
       texte:
         "Pas de panique ! Votre identifiant, c'est votre adresse e-mail. Pour le mot de passe, je vous envoie un lien pour en choisir un nouveau :",
@@ -192,7 +192,7 @@ const REGLES: Regle[] = [
   },
   {
     sujet: "inscription",
-    motsCles: ["inscri", "compte", "rejoindre", "s'inscrire", "connexion", "connecter"],
+    motsCles: ["inscri", "compte", "rejoindre", "s'inscrire", "connexion", "connecter", "sign up", "signup", "register", "account", "join", "log in", "login"],
     reponse: {
       texte: "Rejoindre l'oasis prend cinq minutes. Je vous accueillerai dès votre inscription !",
       liens: [
@@ -203,7 +203,7 @@ const REGLES: Regle[] = [
   },
   {
     sujet: "contact",
-    motsCles: ["contact", "humain", "equipe", "parler a", "joindre", "email", "mail"],
+    motsCles: ["contact", "humain", "equipe", "parler a", "joindre", "email", "mail", "human", "team", "talk to", "speak to", "reach"],
     reponse: {
       texte: "L'équipe Businesseur vous répond avec plaisir. Laissez-nous un message, on revient vers vous rapidement.",
       liens: [{ texte: "Écrire à l'équipe", href: "/#contact" }],
@@ -211,7 +211,7 @@ const REGLES: Regle[] = [
   },
   {
     sujet: "fairy",
-    motsCles: ["qui es-tu", "qui es tu", "fairy", "fee", "robot", "ia", "intelligence"],
+    motsCles: ["qui es-tu", "qui es tu", "fairy", "fee", "robot", "ia", "intelligence", "who are you", "ai"],
     reponse: {
       texte: "Je suis Fairy, la fée guide de Businesseur. Je lis votre profil et je vous oriente vers les mentors, les projets et les investisseurs qui vous correspondent.",
       suggestions: SUGGESTIONS_ACCUEIL.slice(0, 3),

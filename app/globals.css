@@ -550,12 +550,22 @@ h1, h2, h3, h4 {
     font-weight: 600;
 }
 
-.langue a {
+.langue a,
+.langue button {
     padding: 6px 10px;
     opacity: .7;
 }
 
-.langue a:hover {
+.langue button {
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+.langue a:hover,
+.langue button:hover {
     opacity: 1;
 }
 
@@ -2887,7 +2897,8 @@ h1, h2, h3, h4 {
         font-size: .85rem;
     }
 
-    .langue a {
+    .langue a,
+    .langue button {
         padding: 5px 8px;
     }
 
@@ -3470,4 +3481,9 @@ h1, h2, h3, h4 {
 
 .avatar-photo {
     object-fit: cover;
+}
+
+/* 25. Traduction anglaise : la page reste invisible le temps de la traduire */
+html.traduction-en-attente body {
+    opacity: 0;
 }

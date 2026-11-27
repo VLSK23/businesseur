@@ -57,7 +57,7 @@ export default function MentionsLegales() {
           <h2>Cookies</h2>
           <p>
             Le site utilise uniquement le stockage nécessaire pour garder votre session ouverte après
-            connexion. Aucun cookie publicitaire n&apos;est utilisé.
+            connexion et retenir la langue choisie. Aucun cookie publicitaire n&apos;est utilisé.
           </p>
 
           <div className="page-texte__liens">
