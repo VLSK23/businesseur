@@ -595,7 +595,7 @@ export default function Accueil() {
                 <li><span>✦</span> Aide à la rédaction de votre pitch</li>
                 <li><span>✦</span> Rappels et conseils au bon moment</li>
               </ul>
-              <a href="/connexion?mode=inscription" className="bouton bouton--or bouton--grand">Rencontrer Fairy</a>
+              <a href="/fairy" className="bouton bouton--or bouton--grand">Rencontrer Fairy</a>
             </div>
             {/* Fausse fenêtre de chat : les bulles apparaissent l'une après l'autre */}
             <div className="chat apparition" aria-label="Exemple de conversation avec Fairy">

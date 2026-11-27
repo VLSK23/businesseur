@@ -3200,7 +3200,220 @@ h1, h2, h3, h4 {
     color: var(--texte);
 }
 
-.section__tete .histoire__ambition {
+.section__tete p.histoire__ambition {
     display: inline-block;
     text-align: left;
+    font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+    color: var(--texte);
+}
+
+
+
+/* =========================================================
+   23. CHAT AVEC FAIRY (page /fairy)
+   ========================================================= */
+
+.fairy-page {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    align-items: start;
+}
+
+.fairy-page__contenu {
+    width: min(640px, 100%);
+}
+
+.fairy-page__tete {
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--blanc);
+}
+
+.fairy-page__tete h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.fairy-page__note {
+    margin-top: 14px;
+    text-align: center;
+    font-size: .85rem;
+    color: rgba(255, 255, 255, .7);
+}
+
+.fairy-chat {
+    display: flex;
+    flex-direction: column;
+    height: min(640px, calc(100svh - 260px));
+    min-height: 460px;
+    border-radius: var(--rayon);
+    background: var(--blanc);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .3);
+    overflow: hidden;
+}
+
+.fairy-chat__entete {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: var(--nuit);
+    color: var(--blanc);
+}
+
+.fairy-chat__entete small {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: .8rem;
+    color: var(--oasis-clair);
+}
+
+.fairy-chat__avatar {
+    width: 52px;
+    flex-shrink: 0;
+}
+
+.fairy-chat__fil {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 18px;
+    overflow-y: auto;
+    background: #FBF6F2;
+}
+
+.fairy-bulle {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-size: .97rem;
+    line-height: 1.5;
+    animation: fairy-bulle .3s ease-out both;
+}
+
+.fairy-bulle--fee {
+    align-self: flex-start;
+    background: var(--blanc);
+    color: var(--texte);
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 4px 14px rgba(74, 46, 69, .08);
+}
+
+.fairy-bulle--moi {
+    align-self: flex-end;
+    background: var(--nuit);
+    color: var(--blanc);
+    border-bottom-right-radius: 4px;
+}
+
+.fairy-bulle__liens {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.fairy-lien {
+    align-self: flex-start;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #F7EFE3;
+    color: #8E4A63;
+    font-weight: 600;
+    font-size: .9rem;
+}
+
+.fairy-lien:hover {
+    background: #F1E2CF;
+}
+
+.fairy-bulle--ecrit {
+    display: flex;
+    gap: 5px;
+    padding: 16px;
+}
+
+.fairy-bulle--ecrit i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--texte-doux);
+    animation: rebond 1.2s infinite;
+}
+
+.fairy-bulle--ecrit i:nth-child(2) { animation-delay: .15s; }
+.fairy-bulle--ecrit i:nth-child(3) { animation-delay: .3s; }
+
+.fairy-chat__suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 18px 0;
+    background: var(--blanc);
+}
+
+.fairy-chat__suggestions button {
+    padding: 7px 14px;
+    border: 1.5px solid var(--or-clair);
+    border-radius: 999px;
+    background: var(--blanc);
+    color: var(--texte);
+    font: inherit;
+    font-size: .88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.fairy-chat__suggestions button:hover {
+    background: #F7EFE3;
+}
+
+.fairy-chat__saisie {
+    display: flex;
+    gap: 10px;
+    padding: 12px 18px 16px;
+    background: var(--blanc);
+}
+
+.fairy-chat__saisie input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 16px;
+    border: 1.5px solid #E6D8CF;
+    border-radius: 999px;
+    font: inherit;
+    background: #FBF6F2;
+}
+
+.fairy-chat__saisie input:focus {
+    outline: none;
+    border-color: var(--or-clair);
+}
+
+.fairy-chat__saisie .bouton[disabled] {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+@keyframes fairy-bulle {
+    from { opacity: 0; transform: translateY(8px); }
+}
+
+@media (max-width: 480px) {
+    .fairy-chat {
+        height: calc(100svh - 200px);
+    }
+
+    .fairy-page__tete h1 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fairy-bulle,
+    .fairy-bulle--ecrit i {
+        animation: none;
+    }
 }
