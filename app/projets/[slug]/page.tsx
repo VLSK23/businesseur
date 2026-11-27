@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PhotoProfil from "@/components/PhotoProfil";
+import JaugeFinancement from "@/components/JaugeFinancement";
 import { notFound } from "next/navigation";
 import EntetePages from "@/components/EntetePages";
 import { PROJETS, trouverProjet } from "@/lib/projets";
@@ -47,6 +49,8 @@ export default async function ProjetPage({ params }: PageProps<"/projets/[slug]"
               ))}
             </ul>
 
+            <JaugeFinancement leve={projet.financement.leve} objectif={projet.financement.objectif} />
+
             <div className="projet__grille">
               <div>
                 <h2>L&apos;histoire</h2>
@@ -68,7 +72,7 @@ export default async function ProjetPage({ params }: PageProps<"/projets/[slug]"
                 <ul className="projet__equipe">
                   {projet.fondateurs.map((f) => (
                     <li key={f.nom}>
-                      <span className="mini-avatar">{f.initiales}</span>
+                      <PhotoProfil className="avatar-photo avatar-photo--equipe" photo={f.photo} initiales={f.initiales} alt={`Portrait de ${f.nom}`} />
                       <div><strong>{f.nom}</strong><small>{f.role}</small></div>
                     </li>
                   ))}

@@ -17,4 +17,9 @@ Entrepreneurs :
   karim-haddad.jpg     (Kodama, homme)
   manon-robin.jpg      (Atelier Rebond, femme)
 
+Équipes des fiches projet (Léo, Samy et Karim reprennent les photos ci-dessus) :
+  ines-benali.jpg      (Terre & Bocal, femme)
+  julie-perrin.jpg     (Kodama, femme)
+  amina-diallo.jpg     (Atlas Food, femme)
+
 Tant qu'une photo manque, le site affiche le portrait dessiné ou les initiales à la place.

@@ -3497,7 +3497,106 @@ h1, h2, h3, h4 {
     font-size: 1.05rem;
 }
 
+/* Visages de l'équipe sur la fiche d'un projet */
+.avatar-photo--equipe {
+    width: 52px;
+    height: 52px;
+}
+
 /* 25. Traduction anglaise : la page reste invisible le temps de la traduire */
 html.traduction-en-attente body {
     opacity: 0;
+}
+
+/* 26. Jauge de financement des projets */
+.jauge {
+    margin: 0 0 48px;
+    padding: 24px 28px;
+    background: var(--blanc);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+}
+
+.jauge__haut,
+.jauge__montants {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.jauge__titre {
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+}
+
+.jauge__pourcentage {
+    font-family: var(--police-titre);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--nuit);
+}
+
+.jauge__barre {
+    position: relative;
+    height: 14px;
+    margin: 10px 0 12px;
+    border-radius: 999px;
+    background: var(--sable-fonce);
+    overflow: hidden;
+}
+
+.jauge__rempli {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--terracotta), var(--or), var(--or-clair));
+}
+
+.jauge__montants strong {
+    color: var(--texte);
+    font-size: 1.05rem;
+}
+
+.jauge__montants span {
+    color: var(--texte-doux);
+}
+
+.jauge__manque {
+    margin-top: 10px;
+    font-weight: 600;
+    color: var(--or);
+}
+
+/* Version compacte, dans les cartes de la page Projets */
+.jauge--compacte {
+    margin: 6px 0 0;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+}
+
+.jauge--compacte .jauge__pourcentage {
+    font-size: 1.1rem;
+}
+
+.jauge--compacte .jauge__barre {
+    height: 10px;
+    margin: 6px 0 8px;
+}
+
+.jauge--compacte .jauge__montants {
+    font-size: .85rem;
+}
+
+.jauge--compacte .jauge__montants strong {
+    font-size: .9rem;
+}
+
+.jauge--compacte .jauge__manque {
+    margin-top: 4px;
+    font-size: .85rem;
 }

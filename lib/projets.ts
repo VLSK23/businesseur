@@ -8,17 +8,19 @@ export type Projet = {
   secteur: string;
   stade: string;
   ville: string;
-  fondateurs: { nom: string; role: string; initiales: string }[];
+  fondateurs: { nom: string; role: string; initiales: string; photo: string }[]; // photo : à déposer dans public/Images/businesseurs/photos
   histoire: string[];
   points: { titre: string; texte: string }[];
   chiffres: { valeur: string; libelle: string }[];
   besoins: string[];
   image: string; // illustration du projet (public/Images/...)
+  financement: { leve: number; objectif: number }; // montants fictifs en euros, pour la jauge
 };
 
 export const PROJETS: Projet[] = [
   {
     slug: "woufhome",
+    financement: { leve: 62000, objectif: 150000 },
     image: "/Images/businesseurs/woufhome.svg",
     nom: "Wouf'Home",
     accroche: "La niche robotisée qui se nettoie toute seule et garde votre chien au chaud.",
@@ -26,8 +28,8 @@ export const PROJETS: Projet[] = [
     stade: "Prototype",
     ville: "Lyon",
     fondateurs: [
-      { nom: "Léo Marchand", role: "Co-fondateur, ingénieur produit", initiales: "LM" },
-      { nom: "Samy Okafor", role: "Co-fondateur, ventes & marketing", initiales: "SO" },
+      { nom: "Léo Marchand", role: "Co-fondateur, ingénieur produit", initiales: "LM", photo: "/Images/businesseurs/photos/leo-marchand.jpg" },
+      { nom: "Samy Okafor", role: "Co-fondateur, ventes & marketing", initiales: "SO", photo: "/Images/businesseurs/photos/samy-okafor.jpg" },
     ],
     histoire: [
       "Léo et Samy sont amis depuis le collège. L'hiver dernier, Pixel, le berger australien de Samy, est tombé malade après des nuits passées dans une niche froide et humide.",
@@ -61,13 +63,14 @@ export const PROJETS: Projet[] = [
   },
   {
     slug: "terre-et-bocal",
+    financement: { leve: 51000, objectif: 80000 },
     image: "/Images/projets/terre-et-bocal.svg",
     nom: "Terre & Bocal",
     accroche: "L'épicerie vrac qui vient jusqu'aux villages.",
     secteur: "Alimentation & zéro déchet",
     stade: "Lancé, premiers clients",
     ville: "Rennes",
-    fondateurs: [{ nom: "Inès Benali", role: "Fondatrice", initiales: "IB" }],
+    fondateurs: [{ nom: "Inès Benali", role: "Fondatrice", initiales: "IB", photo: "/Images/businesseurs/photos/ines-benali.jpg" }],
     histoire: [
       "Ancienne cheffe de rayon, Inès voyait les villages se vider de leurs commerces. Elle a racheté un camion de livraison et l'a transformé en épicerie vrac itinérante.",
       "Chaque semaine, Terre & Bocal passe dans 12 villages d'Ille-et-Vilaine avec 300 produits locaux, sans emballage jetable.",
@@ -86,6 +89,7 @@ export const PROJETS: Projet[] = [
   },
   {
     slug: "kodama",
+    financement: { leve: 245000, objectif: 400000 },
     image: "/Images/businesseurs/kodama.svg",
     nom: "Kodama",
     accroche: "Le covoiturage du quotidien pour les zones rurales.",
@@ -93,8 +97,8 @@ export const PROJETS: Projet[] = [
     stade: "Je lève des fonds",
     ville: "Clermont-Ferrand",
     fondateurs: [
-      { nom: "Karim Haddad", role: "Fondateur, CEO", initiales: "KH" },
-      { nom: "Julie Perrin", role: "Co-fondatrice, CTO", initiales: "JP" },
+      { nom: "Karim Haddad", role: "Fondateur, CEO", initiales: "KH", photo: "/Images/businesseurs/photos/karim-haddad.jpg" },
+      { nom: "Julie Perrin", role: "Co-fondatrice, CTO", initiales: "JP", photo: "/Images/businesseurs/photos/julie-perrin.jpg" },
     ],
     histoire: [
       "À la campagne, sans voiture, on reste chez soi. Karim l'a vécu pendant ses études, à 40 minutes du premier arrêt de bus.",
@@ -114,13 +118,14 @@ export const PROJETS: Projet[] = [
   },
   {
     slug: "atlas-food",
+    financement: { leve: 228000, objectif: 300000 },
     image: "/Images/projets/atlas-food.svg",
     nom: "Atlas Food",
     accroche: "Des plats marocains faits maison, livrés surgelés partout en France.",
     secteur: "Alimentation",
     stade: "En croissance",
     ville: "Marseille",
-    fondateurs: [{ nom: "Amina Diallo", role: "Fondatrice", initiales: "AD" }],
+    fondateurs: [{ nom: "Amina Diallo", role: "Fondatrice", initiales: "AD", photo: "/Images/businesseurs/photos/amina-diallo.jpg" }],
     histoire: [
       "Les recettes de sa grand-mère ont d'abord été vendues sur les marchés de Marseille. Aujourd'hui, Atlas Food cuisine 2 000 plats par semaine.",
       "Grâce à un mentor rencontré sur Businesseur, Amina a refait son business plan et décroché ses premiers magasins bio.",

@@ -253,6 +253,7 @@ export const TRADUCTIONS: Record<string, string> = {
   "Claire Lefèvre, mentor marketing": "Claire Lefèvre, marketing mentor",
   "Lire l'article": "Read the article",
   "Juridique": "Legal",
+  "Objectif atteint !": "Goal reached!",
   "Micro-entreprise, SASU, SAS : quel statut choisir ?": "Micro-business, SASU, SAS: which legal status should you choose?",
   "Le statut juridique change vos impôts, votre protection sociale et la façon d'accueillir des associés.": "Your legal status changes your taxes, your social protection and how you can bring in partners.",
   "Julien Girard, mentor juridique": "Julien Girard, legal mentor",
@@ -512,6 +513,9 @@ export const TRADUCTIONS: Record<string, string> = {
   "Projet | Businesseur": "Project | Businesseur",
 };
 
+// "62 000" -> "62,000"
+const enChiffres = (n: string) => n.trim().replace(/ /g, ",");
+
 // Textes qui contiennent une partie variable (nom d'un projet, nombre, message d'erreur…)
 const MOTIFS: [RegExp, (m: RegExpMatchArray) => string][] = [
   [/^(.+) \| La Gazette du Businesseur$/, (m) => `${traduire(m[1]) ?? m[1]} | The Businesseur Gazette`],
@@ -523,6 +527,12 @@ const MOTIFS: [RegExp, (m: RegExpMatchArray) => string][] = [
     /^(.+?) : (.+) Le projet est au stade « (.+) »\.$/,
     (m) => `${m[1]}: ${traduire(m[2]) ?? m[2]} The project is at the “${traduire(m[3]) ?? m[3]}” stage.`,
   ],
+  // Jauge de financement des projets
+  [/^([\d ]+) € levés$/, (m) => `€${enChiffres(m[1])} raised`],
+  [/^sur ([\d ]+) €$/, (m) => `of €${enChiffres(m[1])}`],
+  [/^Il manque ([\d ]+) € pour atteindre l'objectif$/, (m) => `€${enChiffres(m[1])} still needed to reach the goal`],
+  [/^Financement : (\d+) % de l'objectif$/, (m) => `Funding: ${m[1]}% of the goal`],
+  [/^(\d+) %$/, (m) => `${m[1]}%`],
   [/^Portrait de (.+)$/, (m) => `Portrait of ${m[1]}`],
   [/^Voir (.+)$/, (m) => `See ${m[1]}`],
   [/^(\d+) spécialités choisies$/, (m) => `${m[1]} specialities chosen`],

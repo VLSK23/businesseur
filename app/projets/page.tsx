@@ -1,5 +1,6 @@
 import Link from "next/link";
 import EntetePages from "@/components/EntetePages";
+import JaugeFinancement from "@/components/JaugeFinancement";
 import { PROJETS } from "@/lib/projets";
 
 export const metadata = {
@@ -29,6 +30,7 @@ export default function ProjetsPage() {
                   <h2>{p.nom}</h2>
                   <p>{p.accroche}</p>
                   <small>{p.secteur} · {p.ville}</small>
+                  <JaugeFinancement leve={p.financement.leve} objectif={p.financement.objectif} compacte />
                   <span className="lien-fleche">Voir le projet</span>
                 </Link>
               ))}
