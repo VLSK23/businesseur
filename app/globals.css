@@ -1594,30 +1594,26 @@ h1, h2, h3, h4 {
         flex-direction: column;
         align-items: center;
         /* Le zoom vise le haut de l'ouverture (ciel de nuit) :
-           hauteur de l'enseigne + 18 % de la porte */
-        transform-origin: 50% calc(44px + var(--porte-h) * .18);
+           18 % de la hauteur de la porte */
+        transform-origin: 50% calc(var(--porte-h) * .18);
         animation: porte-zoom linear both;
         animation-timeline: --porte;
         animation-range: contain 0% contain 100%;
     }
 
-    .intro__enseigne {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        height: 44px;
-        padding: 0 18px;
+    /* Logo "Businesseur" sous le titre : même écriture que le logo de l'en-tête */
+    .intro__logo {
+        margin-top: 14px;
         font-family: var(--police-titre);
-        font-size: .95rem;
-        letter-spacing: .25em;
-        text-transform: uppercase;
-        color: #5A2E45;
-        font-weight: 600;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #4A2E45;
     }
 
-    .intro__enseigne img {
-        width: 24px;
+    .intro__logo em {
+        font-style: normal;
     }
+
 
     /* Encadrement en arche */
     .intro__cadre {
@@ -1632,6 +1628,8 @@ h1, h2, h3, h4 {
             0 0 0 12px #DDB463,
             0 30px 60px -10px rgba(74, 46, 69, .55);
         transform-style: preserve-3d;
+        /* Laisse la place au cadre doré (12 px) : la porte repose sur la première marche */
+        margin-bottom: 12px;
     }
 
     .intro__vue {
@@ -2453,4 +2451,354 @@ h1, h2, h3, h4 {
     flex-wrap: wrap;
     gap: 16px;
     margin-top: 32px;
+}
+
+
+/* =========================================================
+   20. PAGES PROJETS, NOUVEAUX ARRIVANTS, ACT-BUSINESS
+   ========================================================= */
+
+/* Laisse la place à l'en-tête fixe */
+.page-contenu {
+    padding-top: 76px;
+}
+
+.page-contenu .section__tete h1 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    margin-bottom: 18px;
+}
+
+/* Liens de l'en-tête des pages */
+.nav-pages {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    font-size: .95rem;
+    font-weight: 500;
+}
+
+.nav-pages a:not(.bouton) {
+    opacity: .85;
+    transition: opacity var(--transition);
+}
+
+.nav-pages a:not(.bouton):hover {
+    opacity: 1;
+}
+
+/* Grille de cartes cliquables */
+.grille-cartes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 28px;
+}
+
+.carte {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 32px;
+    border-radius: var(--rayon);
+    background: var(--blanc);
+    box-shadow: var(--ombre);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.carte:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--ombre-forte);
+}
+
+.carte h2 {
+    font-size: 1.5rem;
+}
+
+.carte p {
+    color: var(--texte-doux);
+    flex: 1;
+}
+
+.carte small {
+    color: var(--texte-doux);
+    font-size: .85rem;
+}
+
+.carte__badge {
+    align-self: flex-start;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(211, 138, 69, .14);
+    color: #8A5420;
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.lien-retour {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--texte-doux);
+    font-weight: 500;
+}
+
+.lien-retour:hover {
+    color: var(--texte);
+}
+
+.lien-retour--clair {
+    color: rgba(255, 255, 255, .8);
+    margin: 20px 0 0;
+}
+
+.lien-retour--clair:hover {
+    color: var(--blanc);
+}
+
+.auth__pile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(480px, 100%);
+}
+
+.auth__pile .formulaire {
+    width: 100%;
+}
+
+/* Fiche projet */
+.projet__tete h1 {
+    font-size: clamp(2.6rem, 6vw, 4rem);
+    margin-bottom: 12px;
+}
+
+.projet__accroche {
+    max-width: 640px;
+    font-size: 1.25rem;
+    color: var(--texte-doux);
+}
+
+.projet__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.projet__chiffres {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 48px 0;
+    list-style: none;
+}
+
+.projet__chiffres li {
+    padding: 24px;
+    border-radius: var(--rayon);
+    background: var(--blanc);
+    box-shadow: var(--ombre);
+}
+
+.projet__chiffres strong {
+    display: block;
+    font-family: var(--police-titre);
+    font-size: 2.2rem;
+    color: var(--or);
+}
+
+.projet__chiffres span {
+    color: var(--texte-doux);
+}
+
+.projet__grille {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 48px;
+    align-items: start;
+}
+
+.projet__grille h2 {
+    font-size: 1.7rem;
+    margin: 0 0 14px;
+}
+
+.projet__grille > div > p {
+    color: var(--texte-doux);
+    margin-bottom: 14px;
+    font-size: 1.05rem;
+}
+
+.projet__grille > div > h2:not(:first-child) {
+    margin-top: 36px;
+}
+
+.projet__points {
+    display: grid;
+    gap: 16px;
+}
+
+.projet__point {
+    padding: 22px 24px;
+    border-left: 3px solid var(--or);
+    border-radius: 0 16px 16px 0;
+    background: var(--blanc);
+}
+
+.projet__point h3 {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+}
+
+.projet__point p {
+    color: var(--texte-doux);
+}
+
+.projet__cote {
+    position: sticky;
+    top: 100px;
+    padding: 32px;
+    border-radius: var(--rayon);
+    background: var(--blanc);
+    box-shadow: var(--ombre);
+}
+
+.projet__cote h2 {
+    font-size: 1.3rem;
+}
+
+.projet__equipe {
+    list-style: none;
+    display: grid;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.projet__equipe li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.projet__equipe small {
+    display: block;
+    color: var(--texte-doux);
+}
+
+/* Nouveaux arrivants */
+.titre-groupe {
+    margin: 48px 0 24px;
+    font-size: 1.8rem !important;
+}
+
+.mantra {
+    max-width: 820px;
+    text-align: center;
+}
+
+.mantra blockquote {
+    font-family: var(--police-titre);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.25;
+    margin: 10px 0 28px;
+}
+
+.mantra__auteur {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+    margin-bottom: 44px;
+}
+
+.mantra__auteur small {
+    display: block;
+    color: rgba(255, 255, 255, .7);
+}
+
+.mantra h2 {
+    font-size: 1.5rem !important;
+}
+
+.mantra__conseils {
+    display: grid;
+    gap: 12px;
+    max-width: 560px;
+    margin: 0 auto 36px;
+    padding-left: 22px;
+    text-align: left;
+    color: rgba(255, 255, 255, .85);
+    list-style: decimal;
+}
+
+.mantra__conseils li::marker {
+    color: var(--or-clair);
+    font-weight: 600;
+}
+
+/* Article Act-Business */
+.article {
+    max-width: 760px;
+}
+
+.article h1 {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    margin-bottom: 16px;
+}
+
+.article h2 {
+    font-size: 1.6rem;
+    margin: 40px 0 12px;
+}
+
+.article p {
+    margin-bottom: 14px;
+    font-size: 1.08rem;
+    color: var(--texte-doux);
+}
+
+.article__chapo {
+    font-size: 1.3rem !important;
+    color: var(--texte) !important;
+}
+
+.article__auteur {
+    font-size: .95rem !important;
+    font-weight: 600;
+}
+
+.article__newsletter {
+    margin: 56px 0 24px;
+    padding: 36px;
+    border-radius: 28px;
+    background: var(--sable-fonce);
+}
+
+.article__newsletter h2 {
+    margin-top: 0;
+}
+
+.article__autres {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+}
+
+@media (max-width: 900px) {
+    .projet__grille {
+        grid-template-columns: 1fr;
+    }
+
+    .projet__cote {
+        position: static;
+    }
+
+    .nav-pages a:not(.bouton) {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .projet__chiffres {
+        grid-template-columns: 1fr;
+    }
 }

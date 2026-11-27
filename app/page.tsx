@@ -27,8 +27,9 @@ export default function Accueil() {
           <nav className="nav">
             <ul className="nav__liens">
               <li><a href="#histoire">Notre histoire</a></li>
-              <li><a href="#profils">Les Businesseur</a></li>
-              <li><a href="#gazette">La gazette du Businesseur</a></li>
+              <li><a href="/projets">Projets</a></li>
+              <li><a href="/nouveaux-arrivants">Nouveaux arrivants</a></li>
+              <li><a href="/act-business">Act-Business</a></li>
               <li><a href="/don">Faire un don</a></li>
             </ul>
             <div className="nav__actions">
@@ -68,12 +69,11 @@ export default function Accueil() {
             <div className="intro__texte">
               <p className="surtitre">Bienvenue chez Businesseur</p>
               <h2>Poussez la porte de l'oasis</h2>
+              {/* "Businesseur" écrit avec la même police que le logo de l'en-tête */}
+              <p className="intro__logo">Business<em>eur</em></p>
             </div>
-            {/* La porte : enseigne + encadrement + battants + marches */}
+            {/* La porte : encadrement + battants + marches */}
             <div className="intro__porte">
-              <div className="intro__enseigne">
-                <span>Businesseur</span>
-              </div>
               <div className="intro__cadre">
                 {/* Ce qu'on voit derrière la porte : le désert */}
                 <img className="intro__vue" src="/Images/desert-complet.jpg" alt="" />
@@ -688,6 +688,10 @@ export default function Accueil() {
           </div>
           <div>
             <h4>Ressources</h4>
+            <a href="/projets">Les projets</a>
+            <a href="/nouveaux-arrivants">Nouveaux arrivants</a>
+            <a href="/act-business">Act-Business</a>
+            <a href="#gazette">La gazette du Businesseur</a>
             <a href="#lumia">Fairy, la fée IA</a>
             <a href="#etapes">Comment ça marche</a>
             <a href="#contact">Contact</a>
