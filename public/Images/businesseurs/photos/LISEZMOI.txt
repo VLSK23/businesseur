@@ -1,13 +1,20 @@
 Photos des profils fictifs de la page « Les Businesseurs »
 
-Dépose ici 4 visages générés par IA (des personnes qui n'existent pas),
+Dépose ici des visages générés par IA (des personnes qui n'existent pas),
 par exemple depuis https://thispersondoesnotexist.com (actualise la page pour changer de visage,
 puis clic droit > « Enregistrer l'image sous… »).
+Formats acceptés : .jpg, .jpeg, .png ou .webp.
 
-Noms exacts à utiliser (format .jpg) :
+Mentors et investisseur :
   claire-lefevre.jpg   (mentor, marketing)
   marc-delorme.jpg     (mentor, vente)
   fatou-traore.jpg     (mentor, finance)
   thomas-bernard.jpg   (investisseur)
 
-Tant qu'une photo manque, le site affiche le portrait dessiné à la place.
+Entrepreneurs :
+  leo-marchand.jpg     (Wouf'Home, homme)
+  samy-okafor.jpg      (Wouf'Home, homme)
+  karim-haddad.jpg     (Kodama, homme)
+  manon-robin.jpg      (Atelier Rebond, femme)
+
+Tant qu'une photo manque, le site affiche le portrait dessiné ou les initiales à la place.

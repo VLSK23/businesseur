@@ -523,6 +523,7 @@ const MOTIFS: [RegExp, (m: RegExpMatchArray) => string][] = [
     /^(.+?) : (.+) Le projet est au stade « (.+) »\.$/,
     (m) => `${m[1]}: ${traduire(m[2]) ?? m[2]} The project is at the “${traduire(m[3]) ?? m[3]}” stage.`,
   ],
+  [/^Portrait de (.+)$/, (m) => `Portrait of ${m[1]}`],
   [/^Voir (.+)$/, (m) => `See ${m[1]}`],
   [/^(\d+) spécialités choisies$/, (m) => `${m[1]} specialities chosen`],
   [/^Erreur : (.*)$/, (m) => `Error: ${m[1]}`],

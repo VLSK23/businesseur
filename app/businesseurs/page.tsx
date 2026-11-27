@@ -1,7 +1,7 @@
 import Link from "next/link";
 import EntetePages from "@/components/EntetePages";
 import PhotoProfil from "@/components/PhotoProfil";
-import { MANTRA_INVESTISSEUR, NOUVEAUX_ENTREPRENEURS, NOUVEAUX_MENTORS, type Arrivant } from "@/lib/communaute";
+import { MANTRA_INVESTISSEUR, NOUVEAUX_ENTREPRENEURS, NOUVEAUX_MENTORS, type Arrivant, type Visage } from "@/lib/communaute";
 
 export const metadata = {
   title: "Les Businesseurs | Businesseur",
@@ -9,14 +9,18 @@ export const metadata = {
 };
 
 // Carte d'un entrepreneur : l'image de son projet en haut
-function CarteEntrepreneur({ a }: { a: Arrivant }) {
+function CarteEntrepreneur({ a }: { a: Arrivant & { visages: Visage[] } }) {
   return (
     <figure className="temoignage temoignage--image">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="temoignage__image" src={a.image} alt={`Illustration du projet ${a.detail.split(" · ")[0]}`} />
       <blockquote>{a.texte}</blockquote>
       <figcaption>
-        <span className="mini-avatar">{a.initiales}</span>
+        <span className="visages">
+          {a.visages.map((v) => (
+            <PhotoProfil key={v.nom} className="avatar-photo" photo={v.photo} initiales={v.initiales} alt={`Portrait de ${v.nom}`} />
+          ))}
+        </span>
         <div><strong>{a.nom}</strong><small>{a.detail}</small></div>
       </figcaption>
     </figure>

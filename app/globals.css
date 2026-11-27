@@ -3483,6 +3483,20 @@ h1, h2, h3, h4 {
     object-fit: cover;
 }
 
+/* Visages des entrepreneurs (un duo de fondateurs se chevauche légèrement) */
+.visages {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.visages .avatar-photo + .avatar-photo {
+    margin-left: -18px;
+}
+
+.visages .mini-avatar.avatar-photo {
+    font-size: 1.05rem;
+}
+
 /* 25. Traduction anglaise : la page reste invisible le temps de la traduire */
 html.traduction-en-attente body {
     opacity: 0;

@@ -5,10 +5,13 @@
 // Tant que le fichier n'existe pas, le site affiche le portrait dessiné (image).
 export type Arrivant = { nom: string; initiales: string; detail: string; texte: string; image: string; photo?: string };
 
-export const NOUVEAUX_ENTREPRENEURS: Arrivant[] = [
-  { nom: "Léo Marchand & Samy Okafor", initiales: "LS", detail: "Wouf'Home · Prototype", texte: "Deux amis d'enfance qui inventent la niche robotisée : nettoyage automatique et chauffage intelligent.", image: "/Images/businesseurs/woufhome.svg" },
-  { nom: "Karim Haddad", initiales: "KH", detail: "Kodama · Levée de fonds", texte: "Il rend la campagne accessible sans voiture grâce au covoiturage entre voisins.", image: "/Images/businesseurs/kodama.svg" },
-  { nom: "Manon Robin", initiales: "MR", detail: "Atelier Rebond · Croissance", texte: "Elle donne une seconde vie aux vélos abandonnés et forme des jeunes à la réparation.", image: "/Images/businesseurs/atelier-rebond.svg" },
+// Visages des entrepreneurs (une carte peut présenter un duo de fondateurs)
+export type Visage = { nom: string; initiales: string; photo: string };
+
+export const NOUVEAUX_ENTREPRENEURS: (Arrivant & { visages: Visage[] })[] = [
+  { nom: "Léo Marchand & Samy Okafor", initiales: "LS", detail: "Wouf'Home · Prototype", texte: "Deux amis d'enfance qui inventent la niche robotisée : nettoyage automatique et chauffage intelligent.", image: "/Images/businesseurs/woufhome.svg", visages: [{ nom: "Léo Marchand", initiales: "LM", photo: "/Images/businesseurs/photos/leo-marchand.jpg" }, { nom: "Samy Okafor", initiales: "SO", photo: "/Images/businesseurs/photos/samy-okafor.jpg" }] },
+  { nom: "Karim Haddad", initiales: "KH", detail: "Kodama · Levée de fonds", texte: "Il rend la campagne accessible sans voiture grâce au covoiturage entre voisins.", image: "/Images/businesseurs/kodama.svg", visages: [{ nom: "Karim Haddad", initiales: "KH", photo: "/Images/businesseurs/photos/karim-haddad.jpg" }] },
+  { nom: "Manon Robin", initiales: "MR", detail: "Atelier Rebond · Croissance", texte: "Elle donne une seconde vie aux vélos abandonnés et forme des jeunes à la réparation.", image: "/Images/businesseurs/atelier-rebond.svg", visages: [{ nom: "Manon Robin", initiales: "MR", photo: "/Images/businesseurs/photos/manon-robin.jpg" }] },
 ];
 
 export const NOUVEAUX_MENTORS: Arrivant[] = [
