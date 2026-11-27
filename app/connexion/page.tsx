@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import BienvenueFairy from "@/components/BienvenueFairy";
 import EnteteSimple from "@/components/EnteteSimple";
 import ListeDeroulanteMultiple from "@/components/ListeDeroulanteMultiple";
 import { SPECIALITES_MENTOR, STADES_PROJET } from "@/lib/options";
@@ -28,6 +29,8 @@ export default function ConnexionPage() {
   const [envoi, setEnvoi] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
+  // Après une inscription réussie : Fairy apparaît (avec ou sans confirmation par e-mail)
+  const [bienvenue, setBienvenue] = useState<{ confirmationEmail: boolean } | null>(null);
 
   useEffect(() => {
     // Lit l'adresse, ex. /connexion?mode=inscription&profil=mentor
@@ -83,12 +86,17 @@ export default function ConnexionPage() {
     });
     setEnvoi(false);
     if (error) return setErreur(traduire(error.message));
-    if (data.session) {
+    setBienvenue({ confirmationEmail: !data.session });
+  }
+
+  function fermerBienvenue() {
+    if (bienvenue && !bienvenue.confirmationEmail) {
       router.push("/compte");
     } else {
       setInfo("Compte créé ! Cliquez sur le lien reçu par e-mail pour l'activer, puis connectez-vous.");
       setMode("connexion");
     }
+    setBienvenue(null);
   }
 
   return (
@@ -189,6 +197,13 @@ export default function ConnexionPage() {
           </p>
         </form>
       </main>
+      {bienvenue && (
+        <BienvenueFairy
+          prenom={nom.trim().split(/\s+/)[0] ?? ""}
+          confirmationEmail={bienvenue.confirmationEmail}
+          onFermer={fermerBienvenue}
+        />
+      )}
     </>
   );
 }

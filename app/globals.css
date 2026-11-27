@@ -2934,3 +2934,255 @@ h1, h2, h3, h4 {
     margin-top: 40px;
     box-shadow: var(--ombre);
 }
+
+
+/* =========================================================
+   22. BIENVENUE DE FAIRY (après l'inscription) ET PAGE APPLICATION
+   ========================================================= */
+
+.bienvenue {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    overflow-y: auto;
+    background: rgba(35, 29, 79, .72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    animation: bienvenue-fond .4s ease both;
+}
+
+.bienvenue__fenetre {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    width: min(480px, 100%);
+    padding: 0 28px 28px;
+    margin: 90px 0 20px;
+    border-radius: var(--rayon);
+    background: var(--blanc);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .35);
+    text-align: center;
+    animation: monte .6s .15s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+/* Fairy arrive en volant puis flotte au-dessus de la fenêtre */
+.bienvenue__fee {
+    width: 190px;
+    margin-top: -100px;
+    filter: drop-shadow(0 0 24px rgba(221, 180, 99, .6));
+    animation:
+        fee-arrivee 1s .2s cubic-bezier(.2, .8, .2, 1) both,
+        flotte 5s 1.2s ease-in-out infinite;
+}
+
+.fee__aile {
+    transform-box: fill-box;
+    animation: battement .5s ease-in-out infinite alternate;
+}
+
+.fee__aile--gauche { transform-origin: right center; }
+.fee__aile--droite { transform-origin: left center; }
+
+.fee__etoile {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: scintille 1.8s ease-in-out infinite;
+}
+
+.fee__paillette {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: scintille 2.2s ease-in-out infinite;
+}
+
+.fee__paillette:nth-child(2) { animation-delay: .7s; }
+.fee__paillette:nth-child(3) { animation-delay: 1.4s; }
+
+.bienvenue__bulle h2 {
+    font-size: 1.7rem;
+    margin: 6px 0 10px;
+    color: var(--texte);
+}
+
+.bienvenue__bulle p {
+    color: var(--texte-doux);
+}
+
+.bienvenue__note {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #F7EFE3;
+    color: var(--texte) !important;
+    font-size: .95rem;
+}
+
+.bienvenue__appli {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #2F2862, var(--nuit));
+    color: var(--blanc);
+    text-align: left;
+}
+
+.bienvenue__appli p {
+    margin: 2px 0 0;
+    font-size: .9rem;
+    opacity: .8;
+}
+
+/* L'icône de l'application : le palmier, cliquable */
+.bienvenue__icone,
+.application__icone {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: linear-gradient(160deg, #3B3170, #231D4F);
+    box-shadow: 0 0 0 2px rgba(221, 180, 99, .6), 0 8px 20px rgba(0, 0, 0, .3);
+    transition: transform var(--transition);
+    animation: pulsation-or 2s ease-out infinite;
+}
+
+.bienvenue__icone:hover,
+.application__icone:hover {
+    transform: scale(1.08) rotate(-4deg);
+}
+
+.bienvenue__icone img,
+.application__icone img {
+    width: 72%;
+    height: auto;
+}
+
+@keyframes fee-arrivee {
+    from { opacity: 0; transform: translate(-120px, -60px) rotate(-20deg) scale(.6); }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes bienvenue-fond {
+    from { opacity: 0; }
+}
+
+@keyframes pulsation-or {
+    0%   { box-shadow: 0 0 0 2px rgba(221, 180, 99, .6), 0 0 0 0 rgba(221, 180, 99, .5); }
+    100% { box-shadow: 0 0 0 2px rgba(221, 180, 99, .6), 0 0 0 16px rgba(221, 180, 99, 0); }
+}
+
+/* Page /application */
+.application {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 56px;
+    align-items: center;
+}
+
+.application__icone {
+    width: 96px;
+    height: 96px;
+    border-radius: 26px;
+    margin-bottom: 22px;
+}
+
+.application h1 {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    margin-bottom: 16px;
+}
+
+.application__stores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 28px 0 10px;
+}
+
+.store {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px;
+    border-radius: 14px;
+    background: #111;
+    color: var(--blanc);
+    line-height: 1.2;
+}
+
+.store small {
+    display: block;
+    font-size: .72rem;
+    opacity: .75;
+}
+
+.store strong {
+    font-size: 1.05rem;
+}
+
+.store--bientot {
+    opacity: .55;
+    cursor: default;
+}
+
+.application__telephone {
+    justify-self: center;
+    width: min(300px, 100%);
+    aspect-ratio: 9 / 18;
+    padding: 14px;
+    border-radius: 42px;
+    background: #15122E;
+    box-shadow: 0 30px 70px rgba(35, 29, 79, .35);
+}
+
+.application__ecran {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    height: 100%;
+    padding: 24px;
+    border-radius: 30px;
+    background: linear-gradient(180deg, #3B3170, #9C5670 70%, #DDB463);
+    color: var(--blanc);
+    text-align: center;
+}
+
+.application__ecran .fee-mini {
+    width: 120px;
+    animation: flotte 5s ease-in-out infinite;
+}
+
+.application__ecran p {
+    font-family: var(--police-titre);
+    font-size: 1.2rem;
+}
+
+@media (max-width: 900px) {
+    .application {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bienvenue,
+    .bienvenue__fenetre,
+    .bienvenue__fee,
+    .fee__aile,
+    .fee__etoile,
+    .fee__paillette,
+    .bienvenue__icone,
+    .application__icone,
+    .application__ecran .fee-mini {
+        animation: none;
+    }
+}
