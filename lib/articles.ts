@@ -1,4 +1,4 @@
-// Articles de la page Act-Business (documentation sur l'entrepreneuriat).
+// Articles de la page La Gazette du Businesseur (/gazette) (documentation sur l'entrepreneuriat).
 // Pour ajouter un article : copie un bloc { ... } et change le "slug" (l'adresse de la page).
 
 export type Article = {
@@ -10,6 +10,11 @@ export type Article = {
   auteur: string;
   sections: { titre: string; paragraphes: string[] }[];
 };
+
+// Illustration de chaque article : public/Images/gazette/<slug>.svg
+export function imageArticle(slug: string) {
+  return `/Images/gazette/${slug}.svg`;
+}
 
 export const ARTICLES: Article[] = [
   {

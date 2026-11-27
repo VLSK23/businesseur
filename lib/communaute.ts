@@ -1,22 +1,24 @@
-// Nouveaux arrivants présentés sur la page /nouveaux-arrivants (contenu fictif).
+// Membres présentés sur la page /businesseurs (contenu fictif).
+// Les images sont des illustrations dessinées (personnages fictifs), dans public/Images/businesseurs.
 
-export type Arrivant = { nom: string; initiales: string; detail: string; texte: string };
+export type Arrivant = { nom: string; initiales: string; detail: string; texte: string; image: string };
 
 export const NOUVEAUX_ENTREPRENEURS: Arrivant[] = [
-  { nom: "Léo Marchand & Samy Okafor", initiales: "LS", detail: "Wouf'Home · Prototype", texte: "Deux amis d'enfance qui inventent la niche robotisée : nettoyage automatique et chauffage intelligent." },
-  { nom: "Karim Haddad", initiales: "KH", detail: "Kodama · Levée de fonds", texte: "Il rend la campagne accessible sans voiture grâce au covoiturage entre voisins." },
-  { nom: "Manon Robin", initiales: "MR", detail: "Atelier Rebond · Croissance", texte: "Elle donne une seconde vie aux vélos abandonnés et forme des jeunes à la réparation." },
+  { nom: "Léo Marchand & Samy Okafor", initiales: "LS", detail: "Wouf'Home · Prototype", texte: "Deux amis d'enfance qui inventent la niche robotisée : nettoyage automatique et chauffage intelligent.", image: "/Images/businesseurs/woufhome.svg" },
+  { nom: "Karim Haddad", initiales: "KH", detail: "Kodama · Levée de fonds", texte: "Il rend la campagne accessible sans voiture grâce au covoiturage entre voisins.", image: "/Images/businesseurs/kodama.svg" },
+  { nom: "Manon Robin", initiales: "MR", detail: "Atelier Rebond · Croissance", texte: "Elle donne une seconde vie aux vélos abandonnés et forme des jeunes à la réparation.", image: "/Images/businesseurs/atelier-rebond.svg" },
 ];
 
 export const NOUVEAUX_MENTORS: Arrivant[] = [
-  { nom: "Claire Lefèvre", initiales: "CL", detail: "Marketing & stratégie", texte: "Ex-directrice marketing, elle aide les projets à trouver leurs premiers clients." },
-  { nom: "Marc Delorme", initiales: "MD", detail: "Vente & international", texte: "Il a lancé deux marques en grande surface et ouvre maintenant son carnet d'adresses." },
-  { nom: "Fatou Traoré", initiales: "FT", detail: "Finance & impact", texte: "Spécialiste du financement à impact, elle prépare les fondateurs à leur première levée." },
+  { nom: "Claire Lefèvre", initiales: "CL", detail: "Marketing & stratégie", texte: "Ex-directrice marketing, elle aide les projets à trouver leurs premiers clients.", image: "/Images/businesseurs/claire-lefevre.svg" },
+  { nom: "Marc Delorme", initiales: "MD", detail: "Vente & international", texte: "Il a lancé deux marques en grande surface et ouvre maintenant son carnet d'adresses.", image: "/Images/businesseurs/marc-delorme.svg" },
+  { nom: "Fatou Traoré", initiales: "FT", detail: "Finance & impact", texte: "Spécialiste du financement à impact, elle prépare les fondateurs à leur première levée.", image: "/Images/businesseurs/fatou-traore.svg" },
 ];
 
 export const MANTRA_INVESTISSEUR = {
   nom: "Thomas Bernard",
   initiales: "TB",
+  image: "/Images/businesseurs/thomas-bernard.svg",
   role: "Business angel, 24 investissements",
   mantra: "Je n'investis pas dans une idée. J'investis dans une équipe qui sait encore apprendre.",
   conseils: [

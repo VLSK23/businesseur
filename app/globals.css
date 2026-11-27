@@ -533,6 +533,13 @@ h1, h2, h3, h4 {
     animation: tourne 60s linear infinite;
 }
 
+/* Langue + action à droite des en-têtes simples */
+.entete__droite {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
 /* Sélecteur de langue FR / EN */
 .langue {
     display: flex;
@@ -2735,7 +2742,7 @@ h1, h2, h3, h4 {
     font-weight: 600;
 }
 
-/* Article Act-Business */
+/* Article de La Gazette du Businesseur */
 .article {
     max-width: 760px;
 }
@@ -2792,7 +2799,7 @@ h1, h2, h3, h4 {
         position: static;
     }
 
-    .nav-pages a:not(.bouton) {
+    .nav-pages > a:not(.bouton) {
         display: none;
     }
 }
@@ -2800,5 +2807,114 @@ h1, h2, h3, h4 {
 @media (max-width: 640px) {
     .projet__chiffres {
         grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   21. IMAGES : LES BUSINESSEURS ET LA GAZETTE
+   ========================================================= */
+
+/* Image du projet en haut de la carte d'un entrepreneur */
+.temoignage--image {
+    padding-top: 0;
+    overflow: hidden;
+}
+
+.temoignage__image {
+    display: block;
+    width: calc(100% + 72px);
+    max-width: none;
+    margin: 0 -36px;
+    aspect-ratio: 400 / 250;
+    object-fit: cover;
+}
+
+/* Visage dessiné à la place des initiales */
+.avatar-photo {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--blanc), 0 6px 16px rgba(74, 46, 69, .18);
+}
+
+.mantra__auteur .avatar-photo {
+    width: 72px;
+    height: 72px;
+}
+
+/* Image en haut des cartes et des articles de la Gazette */
+.carte--image {
+    padding-top: 0;
+    overflow: hidden;
+}
+
+.carte__image {
+    display: block;
+    width: calc(100% + 64px);
+    max-width: none;
+    margin: 0 -32px 6px;
+    aspect-ratio: 400 / 220;
+    object-fit: cover;
+}
+
+.article__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 400 / 220;
+    object-fit: cover;
+    border-radius: var(--rayon);
+    margin: 8px 0 28px;
+    box-shadow: var(--ombre);
+}
+
+/* Lien retour au-dessus du surtitre de l'article */
+.article .lien-retour {
+    display: block;
+    width: fit-content;
+}
+
+/* En-têtes des pages sur téléphone : tout tient sur une ligne */
+@media (max-width: 640px) {
+    .nav-pages,
+    .entete__droite {
+        gap: 10px;
+    }
+
+    .nav-pages .bouton {
+        padding: 9px 14px;
+        font-size: .85rem;
+    }
+
+    .langue a {
+        padding: 5px 8px;
+    }
+
+    .entete__droite .lien-discret {
+        font-size: .85rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .entete:has(.nav-pages) .logo,
+    .entete--simple .logo {
+        gap: 6px;
+        font-size: 1.1rem;
+    }
+
+    .entete:has(.nav-pages) .logo__icone,
+    .entete--simple .logo__icone {
+        width: 30px;
+    }
+}
+
+@media (max-width: 640px) {
+    .entete__droite .lien-discret {
+        white-space: nowrap;
+    }
+
+    .masque-mobile {
+        display: none;
     }
 }

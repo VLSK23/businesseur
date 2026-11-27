@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import ContactForm from "@/components/ContactForm";
 import NewsletterForm from "@/components/NewsletterForm";
+import Langue from "@/components/Langue";
 
 // Page d'accueil Businesseur (convertie depuis SitewebBusinesseur/index.html).
 // Les liens "S'inscrire" mènent à /connexion, et les formulaires
@@ -28,11 +29,12 @@ export default function Accueil() {
             <ul className="nav__liens">
               <li><a href="#histoire">Notre histoire</a></li>
               <li><a href="/projets">Projets</a></li>
-              <li><a href="/nouveaux-arrivants">Nouveaux arrivants</a></li>
-              <li><a href="/act-business">Act-Business</a></li>
+              <li><a href="/businesseurs">Les Businesseurs</a></li>
+              <li><a href="/gazette">La Gazette</a></li>
               <li><a href="/don">Faire un don</a></li>
             </ul>
             <div className="nav__actions">
+              <Langue />
               <a href="/connexion" className="lien-discret">Se connecter</a>
               <a href="/connexion?mode=inscription" className="bouton bouton--or">S'inscrire</a>
             </div>
@@ -661,7 +663,7 @@ export default function Accueil() {
         <section id="contact" className="section section--sable">
           <div className="conteneur contact">
             <div id="gazette" className="newsletter apparition">
-              <p className="surtitre surtitre--sombre">La gazette du Businesseur</p>
+              <p className="surtitre surtitre--sombre">La Gazette du Businesseur</p>
               <h2>Recevez nos pépites chaque mois</h2>
               <p>Conseils d'experts, appels à projets et portraits d'entrepreneurs, directement dans votre boîte mail.</p>
               <NewsletterForm />
@@ -689,9 +691,8 @@ export default function Accueil() {
           <div>
             <h4>Ressources</h4>
             <a href="/projets">Les projets</a>
-            <a href="/nouveaux-arrivants">Nouveaux arrivants</a>
-            <a href="/act-business">Act-Business</a>
-            <a href="#gazette">La gazette du Businesseur</a>
+            <a href="/businesseurs">Les Businesseurs</a>
+            <a href="/gazette">La Gazette du Businesseur</a>
             <a href="#lumia">Fairy, la fée IA</a>
             <a href="#etapes">Comment ça marche</a>
             <a href="#contact">Contact</a>

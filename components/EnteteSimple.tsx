@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import Langue from "@/components/Langue";
 
 // En-tête des pages Connexion et Mon compte (logo + une action à droite).
 export default function EnteteSimple({ children }: { children?: ReactNode }) {
@@ -11,9 +12,12 @@ export default function EnteteSimple({ children }: { children?: ReactNode }) {
           <img src="/Images/logo-businesseur.png" alt="" className="logo__icone" />
           <span>Business<em>eur</em></span>
         </Link>
-        {children ?? (
-          <Link href="/" className="lien-discret">← Retour à l&apos;accueil</Link>
-        )}
+        <div className="entete__droite">
+          <Langue />
+          {children ?? (
+            <Link href="/" className="lien-discret">← <span className="masque-mobile">Retour à l&apos;</span>accueil</Link>
+          )}
+        </div>
       </div>
     </header>
   );
